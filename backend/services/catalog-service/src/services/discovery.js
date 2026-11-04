@@ -183,13 +183,21 @@ async function searchEvents(
   } catch {
     throw issue(504, "The search took too long. Please try again.");
   }
-  if (!response.ok)
+  if (!response.ok) {
+    const failure = await (response.json?.() || Promise.resolve({})).catch(() => ({}));
+    const violations = (failure.error?.details || []).flatMap((detail) => detail.violations || []);
+    console.error("[discovery provider]", JSON.stringify({
+      status: response.status,
+      code: failure.error?.status,
+      quotas: violations.map(({ quotaMetric, quotaId, quotaValue }) => ({ quotaMetric, quotaId, quotaValue })),
+    }));
     throw issue(
       response.status === 429 ? 429 : 503,
       response.status === 429
         ? "Live search is busy. Please try again later."
         : "Live event search is temporarily unavailable.",
     );
+  }
   let body;
   try {
     body = await response.json();

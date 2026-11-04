@@ -35,6 +35,7 @@ test("discovery accepts only dated, cited public listings and deduplicates URLs"
     event,
     { ...event, url: "https://invented.example.com/event" },
     { ...event, date: "2026-01-01" },
+    { ...event, date: "2027-12-01" },
     { ...event, date: "2026-02-30" },
     { ...event, url: "http://127.0.0.1/private" },
   ];
