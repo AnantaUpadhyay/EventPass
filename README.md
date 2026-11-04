@@ -1,12 +1,12 @@
 # EventPass
 
-**Good plans. Great memories.** A campus experience platform built with React, independently runnable Express services, MongoDB, Redis, SMTP, and a round-robin gateway.
+A campus event booking app built with React, Express, MongoDB and Redis. Students can browse events, reserve up to ten seats, and receive a QR ticket. Organizers can create events.
 
-Discover events, reserve a seat for ten minutes, confirm a mock checkout, and receive a QR ticket.. The system dashboard exposes actual service checks, process metrics, database schemas, and an interactive load-balancing demonstration.
+The backend has four services: authentication, catalog, booking and notifications. Redis coordinates seat holds; MongoDB stores confirmed bookings. Checkout is a demo and does not collect payments.
 
 ## Run locally
 
-Requirements: Node.js **22.12+**, npm, and Docker Desktop running.
+Requires Node.js 22.12 or newer, npm and Docker Desktop.
 
 ```sh
 npm install
@@ -16,59 +16,58 @@ npm run dev
 ```
 
 - App: http://localhost:3000
-- Gateway: http://localhost:8080
-- Captured email inbox: http://localhost:8025
+- API gateway: http://localhost:8080
+- Local email inbox: http://localhost:8025
 
-`setup` creates `.env` with random JWT and internal-service secrets. It preserves an existing `.env`. Local demo seeding is enabled by default. MongoDB and Redis data persist in named Docker volumes.
+Setup creates a local `.env` with random secrets. Do not commit this file.
 
-| Account | Email | Password |
+For local testing, `SEED_DEMO=true` creates these accounts:
+
+| Role | Email | Password |
 | --- | --- | --- |
 | Student | student@college.edu | student123 |
-| Organizer / admin | organizer@college.edu | student123 |
+| Admin | organizer@college.edu | student123 |
 
-Use the organizer account to create an event. Public registration can create only students. The demo accounts exist only when `SEED_DEMO=true`; disable demo seeding before any public deployment.
+These accounts are for local development. Disable demo seeding for a public deployment.
 
-## Run the entire stack in Docker
-
-```sh
-npm run setup
-docker compose up --build -d
-```
-
-Open http://localhost:8080. This runs NGINX, four application services, MongoDB, Redis, and Mailpit. Local development instead uses a small Node gateway with the same routes.
-
-Do not run both gateways on port 8080. To keep local development running while checking Docker:
-
-```sh
-GATEWAY_PORT=9080 docker compose up --build -d
-```
-
-Open http://localhost:9080. Stop containers with `docker compose down`; named database volumes remain intact. Avoid `down -v` unless you intend to erase local database data.
-
-## Project structure
+## Structure
 
 ```text
-client/                         React + Vite app and generated brand assets
-  src/components/               Shared controls and printable QR ticket
-  src/context/                  JWT session state
-  src/pages/                    Discover, booking, tickets, links, dashboard, organizer
-services/
-  auth-service/                 Registration, bcrypt login, JWT profiles
-  catalog-service/              Events, validation, Redis cache-aside
-  booking-service/              Seat leases, idempotent booking, embedded mail outbox
-  notification-service/         Durable SMTP worker, backoff and delivery records
-  shortener-service/            URL CRUD, redirects, expiration, atomic click counts
-  gateway/                      Local round-robin reverse proxy
-shared/                         HTTP errors, authentication, DB and Redis setup, validation
-infra/nginx.conf                Docker gateway and load balancer
-scripts/                        Setup, local process runner, integration tests
-tests/                         Focused validation and authentication tests
- docs/                          API requests, schemas, lab guide, generated asset prompts
+frontend/
+  src/components/        Shared UI and ticket component
+  src/context/           Authentication state
+  src/pages/             Event discovery, reservations and admin screens
+  public/                Images and fonts
+backend/
+  services/
+    auth-service/        Registration, login and profiles
+    catalog-service/     Event data and cache
+    booking-service/     Holds, checkout and saved tickets
+    notification-service/ SMTP delivery and retries
+    gateway/             Local reverse proxy
+  shared/                Authentication, validation and connection helpers
+  infra/                 NGINX configuration
+  tests/                 Backend unit tests
+scripts/                 Setup, process runner and integration tests
+docs/                    Schema, architecture and API examples
 ```
 
-Every service owns its database. Services communicate through HTTP and the authenticated internal outbox API. No production service directly reads another service's MongoDB collections.
+Each service has its own `server.js` and package manifest. Auth, catalog and booking use routes, controllers, models and config folders. The smaller notification service keeps its worker and delivery model in `src/app.js`.
 
-## Verification
+Use `npm run dev:frontend` and `npm run dev:backend` in separate terminals if preferred. Install dependencies once from the repository root.
+
+## Reservation flow
+
+1. Clicking a seat requests a Redis hold immediately. The server validates the seat and authenticated owner.
+2. A Lua script checks all requested seats before acquiring the group. Overlapping requests receive a conflict without a partial hold.
+3. Holds expire after up to ten minutes. Signing out does not release them; deselection or explicit release does.
+4. Confirmation requires an idempotency key and live owned holds. The server calculates the total from catalog prices.
+5. One MongoDB document saves the group and its pending email intent. A unique confirmed event/seat index prevents duplicate bookings.
+6. The notification worker sends the QR attachment through SMTP and retries failed attempts.
+
+The Redis inventory counter is advisory. Confirmed availability comes from MongoDB seat counts. Email delivery is at-least-once, so a crash near SMTP acknowledgement can cause a duplicate email.
+
+## Checks
 
 ```sh
 npm test
@@ -76,36 +75,29 @@ npm run build
 npm run test:integration
 ```
 
-The integration runner requires the running local stack and demo admin account. It creates disposable test users, an event and short links, then removes only its own MongoDB/Redis fixtures. Test email messages remain in Mailpit for inspection. Evidence is saved to `artifacts/integration-results.json`.
+Integration tests require the running services and demo admin account. They create temporary test records, test competing holds and checkout, verify email delivery, and remove their own database fixtures. Results go to the ignored `artifacts/` directory.
 
-The checks cover authentication and authorization, cache hits, invalid seats, racing holds, concurrent checkouts, server-derived price and identity, idempotent retries, lease expiration and SMTP delivery. Configure `TEST_BASE=http://127.0.0.1:9080` to test the Docker gateway. Set `TEST_MONGO` if the test runner's MongoDB address differs from localhost.
+## Docker
 
-## Key decisions
+```sh
+docker compose up --build -d
+```
 
-- **Durable correctness:** MongoDB's partial unique `(eventId, seatNumber)` index prevents two confirmed tickets for one seat. `(userId, requestId)` makes checkout retries idempotent.
-- **Redis leases:** Lua atomically acquires a 600-second hold and coordinates advisory inventory. Confirmation requires a live owned hold and claims a short checkout lease. Release uses atomic compare-and-delete.
-- **Fail closed:** There is no in-memory fallback pretending to be durable or distributed. Booking returns an error if Redis is unavailable. Services wait for database initialization before accepting requests.
-- **Inventory:** Confirmed availability is derived from MongoDB booking counts. The Redis counter is advisory and reconciles expired holds on the next reservation. It is not a cross-database transaction or the final overselling safeguard.
-- **Email:** A ticket and email intent are committed together in one booking document. The worker polls through an internal authenticated API, saves delivery attempts in its own database, uses worker leases, and retries with capped exponential backoff. SMTP delivery is at-least-once: a crash after SMTP acceptance can cause a duplicate email.
+Open http://localhost:8080. NGINX serves the frontend and routes API requests to the four services. MongoDB and Redis persist in named volumes. `docker compose down` stops the stack without deleting those volumes.
 
-- **Catalog:** Static event metadata is cached for 3,600 seconds. A version key invalidates all list variants after creation. Live availability is added from the booking service and is `null` if that service is unavailable.
-- **Payment:** Deliberately mocked. No card details or real money are collected.
-- **Email environment:** Mailpit captures local SMTP messages. External SMTP requires your own provider configuration in `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, and `SMTP_FROM`; no external mail account is configured.
+If the local gateway already occupies port 8080, use `GATEWAY_PORT=9080 docker compose up --build -d`.
 
-## Design
+## Documentation
 
-Custom generated olive admission-ticket emblem, original concert/hackathon/workshop/esports photography, warm paper surfaces, muted stone accents, Instrument Sans and Newsreader, and an editorial serif. Generated images are local assets. Fonts are served locally with system fallbacks. Motion respects `prefers-reduced-motion`; screens adapt to mobile; dialogs trap focus and support Escape; tickets support browser print/save as PDF.
-
-Generation prompts and file locations: [brand assets](docs/BRAND_ASSETS.md).
-
-## Lab preparation
-
-- [Lab demonstration and viva guide](docs/LAB_EVALUATION.md)
-- [Implemented system design](EVENTPASS_SYSTEM_DESIGN.md)
+- [Architecture and trade-offs](docs/ARCHITECTURE.md)
 - [Database schema](docs/DATABASE_SCHEMA.md)
-- [Runnable HTTP examples](docs/api.http)
+- [Schema diagram](docs/EventPass_Database_Schema.png)
 - [Postman collection](docs/EventPass.postman_collection.json)
+- [HTTP request examples](docs/api.http)
+- [Assets](docs/ASSETS.md)
 
-The supplied [lecture mailer](https://github.com/pepleadgenius/micrsoervices_batch_friday_lab/tree/main/mailer_service) informed the Nodemailer/SMTP service boundary. This implementation adds JSON parsing, validation, a durable booking outbox, retries, QR attachments, and a local captured inbox. It does not copy credentials from that repository.
+The mail service follows the Express/Nodemailer pattern from the [lecture example](https://github.com/pepleadgenius/micrsoervices_batch_friday_lab/tree/main/mailer_service), with a durable outbox, retry state and QR attachments.
 
-This is a complete local semester-project implementation, not a claim of audited production readiness or measured support for 5,000 concurrent users. TLS, managed secrets, distributed tracing, a multi-node Redis/Mongo deployment, real payments and production-scale load testing remain deployment work.
+## Current limits
+
+Payment is mocked. Cancellation, refunds and admission scanning are not implemented. Local email is captured by Mailpit; external delivery needs an SMTP provider. Sessions are held in memory and reset on refresh. Production TLS, multi-node infrastructure and large-scale load testing remain deployment work.

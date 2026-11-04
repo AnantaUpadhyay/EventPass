@@ -6,7 +6,6 @@
 @eventId = evt_neon_nights_2026
 @seatId = A2
 @checkoutKey = lab-checkout-unique-key-0001
-@code = paste-created-code-here
 
 ### Register — role is always student
 POST {{base}}/api/auth/register

@@ -1,0 +1,1317 @@
+:root {
+  --paper: #f4f1e9;
+  --white: #fffdf8;
+  --ink: #252a25;
+  --muted: #73776d;
+  --line: #deded3;
+  --violet: #40533e;
+  --violet-light: #e6eadf;
+  --lime: #e7dabe;
+  font-family: "Instrument Sans", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+h1,
+h2,
+h3 {
+  font-family: "Instrument Sans", sans-serif;
+}
+.serif-word,
+.hero-copy h2 > span {
+  font-family: "Newsreader", Georgia, serif;
+  color: #65735b;
+}
+.hero-copy {
+  background: #34483e;
+}
+.hero-copy:after {
+  display: none;
+}
+.hero-copy:before {
+  opacity: 0.045;
+}
+.hero-copy h2 {
+  white-space: normal;
+  font-size: clamp(28px, 3vw, 42px);
+}
+.hero-copy h2 > span {
+  color: #e0d7bf;
+}
+.hero-copy > .button {
+  background: #e6d9bc;
+  color: #29382d;
+}
+.hero-image > img {
+  filter: saturate(0.4) brightness(0.75);
+}
+.hero-small-star {
+  color: #c8ccb9;
+}
+.floating-ticket {
+  background: #eee7d8;
+  color: #34483e;
+}
+.ticket-star {
+  color: #55674c;
+}
+
+.topbar {
+  background: #faf8f2;
+}
+.brand-period,
+.purple,
+.text-button {
+  color: var(--violet);
+}
+.brand-logo {
+  filter: none;
+}
+.editorial-heading h1 {
+  font-size: clamp(34px, 4.5vw, 64px);
+  letter-spacing: -2px;
+  font-weight: 600;
+}
+.editorial-heading > p {
+  color: #71766b;
+}
+.button.primary {
+  background: #40533e;
+  box-shadow: none;
+}
+.button.primary:hover:not(:disabled) {
+  background: #30442f;
+}
+.button.lime:hover:not(:disabled) {
+  background: #ddd0b3;
+}
+.event-card {
+  border-radius: 8px;
+  background: var(--white);
+}
+.event-photo > img {
+  filter: saturate(0.65) brightness(0.95);
+}
+.event-info h3 {
+  font-size: 17px;
+}
+.event-time,
+.event-venue,
+.availability,
+.card-action {
+  font-size: 11px;
+  color: #666f61;
+}
+.category-tabs > button {
+  font-size: 12px;
+  min-height: 40px;
+}
+.page-description,
+label,
+.panel > p,
+.state-step p,
+.schema-card > p {
+  color: #66715f;
+}
+.page-heading h1 {
+  font-weight: 550;
+}
+.hero-kicker,
+.eyebrow {
+  letter-spacing: 1.3px;
+}
+.manifesto {
+  background: #e9e5d9;
+}
+.manifesto-star {
+  font-family: "Newsreader", serif;
+  color: #647454;
+}
+.manifesto:after {
+  display: none;
+}
+.main-content {
+  view-transition-name: page;
+}
+.order-cover,
+.booking-success .ticket-cover {
+  view-transition-name: event-art;
+}
+.system-tabs > button.active {
+  view-transition-name: active-tab;
+}
+::view-transition-old(page) {
+  animation: fade-out 0.18s ease both;
+}
+::view-transition-new(page) {
+  animation: page-in 0.32s ease both;
+}
+::view-transition-group(event-art) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+::view-transition-group(nav-selection),
+::view-transition-group(active-tab) {
+  animation-duration: 0.35s;
+}
+.filter-panel {
+  animation: card-in 0.25s ease;
+}
+.modal {
+  animation: card-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.button svg,
+.text-button svg {
+  transition: transform 0.25s;
+}
+.button:hover svg,
+.text-button:hover svg {
+  transform: translate(2px, -2px);
+}
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+.theme-toggle {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.journal-line {
+  width: 20px;
+  border-top: 1px solid currentColor;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #191e1a;
+  --white: #222923;
+  --ink: #eeeade;
+  --muted: #b5bcaf;
+  --line: #384237;
+  --violet: #b4c4a2;
+  --violet-light: #35412f;
+  --lime: #d2c29e;
+}
+[data-theme="dark"] body,
+[data-theme="dark"] .topbar {
+  background: var(--paper);
+  color: var(--ink);
+}
+[data-theme="dark"]
+  :is(
+    .event-card,
+    .panel,
+    .seat-panel,
+    .order-panel,
+    .ticket-card,
+    .modal,
+    .metric,
+    .architecture-panel,
+    .schema-card,
+    .api-reference,
+    .links-table,
+    .create-event-panel
+  ) {
+  background: var(--white);
+  border-color: var(--line);
+  color: var(--ink);
+}
+[data-theme="dark"]
+  :is(
+    .organizer-note,
+    .link-stats,
+    .manifesto,
+    .service-item,
+    .seat-note,
+    .arch-node,
+    .filter-panel,
+    .segmented,
+    .lab-note,
+    .system-status,
+    .schema-card > pre,
+    .routing-samples > div
+  ) {
+  background: #2b352b;
+  border-color: #43503e;
+  color: #d0d7c7;
+}
+[data-theme="dark"] :is(input, select, textarea, .search-box) {
+  background: #252e26;
+  border-color: #495443;
+  color: #eeeade;
+}
+[data-theme="dark"]
+  :is(
+    p,
+    label,
+    small,
+    .event-time,
+    .event-venue,
+    .card-action,
+    .availability,
+    .breadcrumb,
+    .page-description,
+    .order-meta,
+    .order-row,
+    .ticket-details,
+    .schema-card > code,
+    .api-reference code,
+    .state-step p,
+    .metric > p,
+    .lab-note p,
+    .service-item small,
+    .link-table-row a,
+    .link-destination > span
+  ) {
+  color: #b6bfae;
+}
+[data-theme="dark"]
+  :is(
+    h1,
+    h2,
+    h3,
+    .metric > b,
+    .service-item b,
+    .state-step b,
+    .ticket-seat b,
+    .order-row b,
+    .link-metric b
+  ) {
+  color: #eeeade;
+}
+[data-theme="dark"] .button.primary {
+  background: #b8c6a8;
+  color: #202b20;
+}
+[data-theme="dark"] .serif-word {
+  color: #b8c6a8;
+}
+[data-theme="dark"] .hero-copy p {
+  color: #d8dfd1;
+}
+[data-theme="dark"] .ticket-perforation:before,
+[data-theme="dark"] .ticket-perforation:after {
+  background: var(--paper);
+}
+@media (max-width: 540px) {
+  .editorial-heading h1 {
+    font-size: clamp(34px, 9.4vw, 46px);
+    letter-spacing: -1.5px;
+  }
+  .hero-copy h2 {
+    font-size: 32px;
+    white-space: normal;
+    overflow-wrap: normal;
+  }
+  .hero-copy {
+    padding: 26px 22px;
+  }
+  .topbar {
+    padding: 0 12px;
+  }
+  .breadcrumb {
+    font-size: 9px;
+  }
+  .breadcrumb b {
+    display: none;
+  }
+  .topbar-right {
+    gap: 4px;
+  }
+  .hero-copy > p:not(.hero-kicker) {
+    font-size: 12px;
+  }
+  .campus-label {
+    display: none;
+  }
+  .page-heading h1 {
+    font-size: 32px;
+  }
+  .event-card-bottom small {
+    font-size: 10px;
+  }
+  .seat-map-scroll {
+    overscroll-behavior-x: contain;
+  }
+  .form-two {
+    grid-template-columns: 1fr;
+  }
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+  .hero-image-caption > b {
+    font-size: 29px;
+  }
+  .main-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Discovery layout follows familiar ticketing navigation and poster hierarchy. */
+:root {
+  --sidebar: 0px;
+}
+.main-shell {
+  margin-left: 0;
+  width: 100%;
+}
+.topbar {
+  height: 82px;
+  max-width: none;
+  padding: 0 max(24px, calc((100vw - 1240px) / 2));
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 45;
+}
+.topbar-left {
+  gap: 28px;
+}
+.breadcrumb {
+  font-size: 14px;
+}
+.main-content {
+  max-width: 1280px;
+  padding: 34px 28px;
+}
+.main-footer {
+  max-width: 1224px;
+  width: calc(100% - 56px);
+  margin: 30px auto 0;
+}
+.editorial-heading {
+  margin: 20px 0 28px;
+}
+.editorial-heading h1 {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.15;
+}
+.editorial-heading h1 br {
+  display: none;
+}
+.editorial-heading h1 .serif-word {
+  font-family: inherit;
+  font-style: normal;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+.editorial-heading h1 .serif-word:before {
+  content: " ";
+}
+.hero {
+  min-height: 360px;
+  grid-template-columns: 42% 58%;
+}
+.hero-copy {
+  padding: 32px;
+}
+.hero-copy h2 {
+  font-size: 40px;
+}
+.hero-image {
+  min-height: 360px;
+}
+.hero-image-caption {
+  display: none;
+}
+.floating-ticket {
+  right: 45px;
+  top: 80px;
+}
+.events-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+.event-photo {
+  height: 260px;
+}
+.event-card {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+.event-photo {
+  border-radius: 8px;
+}
+.event-info {
+  padding: 14px 0 0;
+}
+.event-info h3 {
+  font-size: 17px;
+  min-height: 48px;
+}
+.event-card-bottom {
+  border: 0;
+  margin-top: 12px;
+  padding-top: 0;
+}
+.event-info-top {
+  flex-wrap: wrap;
+}
+.event-venue {
+  white-space: normal;
+}
+.category-tabs {
+  gap: 10px;
+}
+.category-tabs > button {
+  border-radius: 24px;
+  padding: 10px 18px;
+}
+.discovery-controls {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+}
+.search-row {
+  margin-top: 0;
+}
+.search-box {
+  min-height: 48px;
+  background: var(--white);
+}
+.search-box input {
+  font-size: 14px;
+}
+.category-tabs > button.active {
+  background: #40533e;
+}
+.manifesto {
+  margin-top: 45px;
+}
+.topbar-right {
+  gap: 15px;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.desktop-nav button {
+  background: none;
+  border: 0;
+  padding: 12px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.desktop-nav button.selected {
+  color: var(--ink);
+  box-shadow: inset 0 -2px var(--violet);
+}
+.mobile-bottom-nav {
+  display: none;
+}
+.topbar .brand {
+  font-size: 25px;
+}
+.topbar .brand-logo {
+  width: 35px;
+  height: 35px;
+}
+.intro-line .eyebrow {
+  font-size: 10px;
+}
+.result-count {
+  font-size: 12px;
+}
+.section-top h2 {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 28px;
+}
+.section-top .serif-word {
+  font-family: inherit;
+  font-style: normal;
+  color: inherit;
+  letter-spacing: inherit;
+}
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .event-photo {
+    height: 240px;
+  }
+  .desktop-nav {
+    gap: 14px;
+  }
+  .topbar-left {
+    gap: 16px;
+  }
+  .breadcrumb {
+    display: none;
+  }
+  .hero-copy h2 {
+    font-size: 32px;
+  }
+  .hero {
+    grid-template-columns: 48% 52%;
+  }
+  .topbar {
+    padding: 0 24px;
+  }
+  .editorial-heading > p {
+    min-width: 180px;
+  }
+  .edition {
+    display: none;
+  }
+}
+@media (max-width: 540px) {
+  .topbar {
+    height: 65px;
+    padding: 0 16px;
+  }
+  .topbar .brand {
+    font-size: 22px;
+  }
+  .topbar .brand-logo {
+    width: 29px;
+    height: 29px;
+  }
+  .topbar-right {
+    gap: 6px;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    padding: 7px 12px max(9px, env(safe-area-inset-bottom));
+    justify-content: space-around;
+  }
+  .mobile-bottom-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 6px 18px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+  .mobile-bottom-nav button.selected {
+    color: var(--violet);
+  }
+  .main-shell {
+    padding-bottom: 76px;
+  }
+  .main-content {
+    padding: 23px 16px;
+  }
+  .editorial-heading {
+    display: block;
+  }
+  .editorial-heading h1 {
+    font-size: 32px;
+    letter-spacing: -1px;
+    max-width: 100%;
+  }
+  .editorial-heading > p {
+    font-size: 12px;
+    line-height: 1.65;
+    margin-top: 12px;
+  }
+  .editorial-heading > p br {
+    display: none;
+  }
+  .editorial-heading > p > span {
+    font-size: 11px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .hero-copy {
+    padding: 25px 23px;
+  }
+  .hero-copy h2 {
+    font-size: 31px;
+    line-height: 1.15;
+    overflow-wrap: break-word;
+  }
+  .hero-image {
+    min-height: 210px;
+  }
+  .floating-ticket {
+    width: 120px;
+    right: 30px;
+    top: 40px;
+  }
+  .hero-copy h2 > span {
+    font-size: 1.1em;
+  }
+  .events-grid {
+    gap: 16px 12px;
+  }
+  .event-photo {
+    height: 215px;
+  }
+  .event-info h3 {
+    font-size: 14px;
+    min-height: 0;
+    line-height: 1.4;
+  }
+  .event-info-top {
+    font-size: 10px;
+  }
+  .event-time {
+    font-size: 10px;
+  }
+  .availability {
+    font-size: 9px;
+  }
+  .event-venue {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .event-card-bottom {
+    display: block;
+    margin-top: 12px;
+  }
+  .event-card-bottom > span:first-child {
+    font-size: 13px;
+  }
+  .card-action {
+    display: none;
+  }
+  .category-badge {
+    font-size: 8px;
+    padding: 5px 7px;
+    left: 9px;
+    top: 9px;
+  }
+  .date-block {
+    left: 9px;
+    bottom: 9px;
+    min-width: 35px;
+  }
+  .date-block > b {
+    font-size: 19px;
+  }
+  .date-block > span {
+    font-size: 7px;
+  }
+  .event-open {
+    width: 23px;
+    height: 23px;
+    right: 8px;
+    top: 8px;
+  }
+  .category-tabs {
+    overflow: auto;
+    flex-wrap: nowrap;
+    gap: 7px;
+  }
+  .category-tabs > button {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+  .main-footer {
+    width: calc(100% - 32px);
+  }
+  .topbar .user-name {
+    display: none;
+  }
+  .page-heading h1 {
+    overflow-wrap: break-word;
+  }
+  .ticket-card {
+    max-width: 100%;
+  }
+  .section-top h2 {
+    font-size: 25px;
+  }
+  .search-box input {
+    font-size: 16px;
+  }
+  .hero-kicker {
+    font-size: 9px;
+  }
+  .hero-copy > p:not(.hero-kicker) {
+    font-size: 12px;
+  }
+  .editorial-heading h1 .serif-word {
+    white-space: normal;
+  }
+  .hero-bottom {
+    margin-top: 20px;
+  }
+  .manifesto {
+    padding: 22px 18px;
+  }
+  .manifesto h2 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 360px) {
+  .event-photo {
+    height: 180px;
+  }
+  .hero-copy h2 {
+    font-size: 28px;
+  }
+  .editorial-heading h1 {
+    font-size: 29px;
+  }
+  .topbar .brand {
+    font-size: 20px;
+  }
+}
+
+.breadcrumb {
+  display: none;
+}
+.editorial-heading h1 .serif-word:before {
+  content: none;
+}
+[data-theme="dark"] .mobile-bottom-nav {
+  background: var(--white);
+}
+[data-theme="dark"] .category-tabs > button {
+  color: #c5cdbd;
+}
+[data-theme="dark"] .date-block {
+  background: #e7dfce;
+  color: #29382d;
+}
+/* Group reservations keep every seat readable on narrow tickets. */
+.ticket-seat {
+  gap: 16px;
+}
+.ticket-seat > span:first-child {
+  min-width: 0;
+  flex: 1;
+}
+.ticket-seat > span:first-child b {
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.order-row b {
+  max-width: 70%;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+/* OLED dark: black canvas and neutral surfaces, without a green tint. */
+[data-theme="dark"] {
+  --paper: #000;
+  --white: #0b0b0b;
+  --ink: #f2f2f2;
+  --muted: #a3a3a3;
+  --line: #292929;
+  --violet: #dedede;
+  --violet-light: #1b1b1b;
+  --lime: #dedede;
+}
+[data-theme="dark"] :is(.topbar, .mobile-bottom-nav, .main-footer) {
+  background: #000;
+  border-color: #252525;
+}
+[data-theme="dark"]
+  :is(
+    .organizer-note,
+    .link-stats,
+    .manifesto,
+    .service-item,
+    .seat-note,
+    .arch-node,
+    .filter-panel,
+    .segmented,
+    .lab-note,
+    .system-status,
+    .schema-card > pre,
+    .routing-samples > div,
+    .hero-copy
+  ) {
+  background: #121212;
+  border-color: #2a2a2a;
+  color: #dedede;
+}
+[data-theme="dark"] :is(input, select, textarea, .search-box) {
+  background: #111;
+  border-color: #333;
+  color: #f2f2f2;
+}
+[data-theme="dark"]
+  :is(
+    p,
+    label,
+    small,
+    .event-time,
+    .event-venue,
+    .card-action,
+    .availability,
+    .breadcrumb,
+    .page-description,
+    .order-meta,
+    .order-row,
+    .ticket-details,
+    .schema-card > code,
+    .api-reference code,
+    .state-step p,
+    .metric > p,
+    .lab-note p,
+    .service-item small,
+    .link-table-row a,
+    .link-destination > span
+  ) {
+  color: #aaa;
+}
+[data-theme="dark"]
+  :is(
+    h1,
+    h2,
+    h3,
+    .metric > b,
+    .service-item b,
+    .state-step b,
+    .ticket-seat b,
+    .order-row b,
+    .link-metric b
+  ) {
+  color: #f2f2f2;
+}
+[data-theme="dark"] .button.primary,
+[data-theme="dark"] .hero-copy > .button {
+  background: #e5e5e5;
+  color: #111;
+}
+[data-theme="dark"] .button.primary:hover:not(:disabled),
+[data-theme="dark"] .hero-copy > .button:hover:not(:disabled) {
+  background: #fff;
+  color: #000;
+}
+[data-theme="dark"]
+  :is(
+    .nav-item.active,
+    .category-tabs > button.active,
+    .segmented > button.selected
+  ) {
+  background: #262626;
+  color: #fff;
+  border-color: #444;
+}
+[data-theme="dark"]
+  :is(
+    .serif-word,
+    .hero-copy h2 > span,
+    .text-button,
+    .purple,
+    .brand-period,
+    .hero-small-star
+  ) {
+  color: #ddd;
+}
+[data-theme="dark"] .hero-copy p {
+  color: #bbb;
+}
+[data-theme="dark"] .date-block {
+  background: #ddd;
+  color: #111;
+}
+[data-theme="dark"] .seat.available {
+  background: #171717;
+  border-color: #555;
+  color: #ccc;
+}
+[data-theme="dark"] .seat.selected {
+  background: #e5e5e5;
+  border-color: #fff;
+  color: #111;
+}
+[data-theme="dark"] .seat.booked {
+  background: #292929;
+  color: #777;
+}
+[data-theme="dark"] body:before {
+  display: none;
+}
+/* The header sign-in button needs explicit contrast when --ink becomes light. */
+[data-theme="dark"] .button.dark {
+  background: #f2f2f2;
+  color: #111;
+  border-color: #f2f2f2;
+}
+[data-theme="dark"] .button.dark:hover:not(:disabled) {
+  background: #d9d9d9;
+  color: #000;
+  border-color: #d9d9d9;
+}
+[data-theme="dark"] .button.dark:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+/* Respect Safari browser chrome, the camera cutout and the home indicator. */
+.modal-overlay {
+  padding: max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+}
+.modal {
+  max-height: calc(
+    100dvh - max(24px, env(safe-area-inset-top)) -
+      max(24px, env(safe-area-inset-bottom))
+  );
+  overscroll-behavior: contain;
+  scroll-padding-block: 20px;
+}
+.seat-scroll-hint {
+  display: none;
+}
+@media (pointer: coarse) and (max-width: 1000px) {
+  input,
+  select,
+  textarea,
+  .search-box input,
+  .sort-label select {
+    font-size: 16px;
+  }
+  .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .seat {
+    width: 44px;
+    height: 44px;
+    font-size: 12px;
+  }
+  .seat-grid,
+  .stage {
+    min-width: 600px;
+  }
+  .seat-map-scroll {
+    overscroll-behavior-x: contain;
+  }
+  .seat-scroll-hint {
+    display: block;
+    margin: 0;
+    padding: 0 20px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .topbar {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .main-content {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .mobile-bottom-nav {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  .mobile-bottom-nav button {
+    min-height: 44px;
+  }
+  .main-shell {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+@media (pointer: coarse) and (max-height: 500px) and (orientation: landscape) {
+  .topbar {
+    height: 64px;
+  }
+  .topbar-left {
+    gap: 16px;
+  }
+  .desktop-nav {
+    gap: 12px;
+  }
+  .topbar .user-name {
+    display: none;
+  }
+}
+
+/* Keep the seating plan and checkout together on laptop displays. */
+@media (min-width: 1001px) {
+  .app-shell:has(.booking-screen) .topbar {
+    height: 64px;
+  }
+  .app-shell:has(.booking-screen) .main-footer {
+    display: none;
+  }
+  .main-content:has(.booking-screen) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .booking-screen .back-button {
+    margin-bottom: 10px;
+  }
+  .booking-screen .booking-heading {
+    margin-bottom: 16px;
+  }
+  .booking-screen .booking-heading h1 {
+    font-size: 36px;
+    margin: 6px 0;
+    line-height: 1.1;
+  }
+  .booking-screen .booking-heading > p {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .booking-screen .booking-layout {
+    gap: 22px;
+    align-items: start;
+  }
+  .booking-screen .seat-panel-top {
+    padding: 14px 20px;
+  }
+  .booking-screen .seat-map-scroll {
+    padding: 8px 18px 18px;
+  }
+  .booking-screen .stage {
+    margin-bottom: 18px;
+  }
+  .booking-screen .stage > div {
+    height: 22px;
+    margin-top: 8px;
+  }
+  .booking-screen .seat-grid {
+    gap: 9px;
+  }
+  .booking-screen .seat-legend {
+    padding: 14px 10px;
+  }
+  .booking-screen .seat-note {
+    padding: 12px 20px;
+  }
+  .booking-screen .order-cover {
+    height: 64px;
+    display: block;
+  }
+  .booking-screen .order-content {
+    padding: 12px 18px;
+  }
+  .booking-screen .order-content h2 {
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 6px 0;
+  }
+  .booking-screen .order-meta {
+    gap: 4px;
+    margin: 8px 0;
+  }
+  .booking-screen .event-description {
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 8px 0;
+  }
+  .booking-screen .order-row {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .booking-screen .order-total {
+    margin: 10px 0;
+    padding-top: 10px;
+  }
+  .booking-screen .hold-countdown {
+    margin: 8px 0;
+    padding: 7px 10px;
+  }
+  .booking-screen .button.full {
+    min-height: 40px;
+    padding: 10px 14px;
+  }
+  .booking-screen .release-button {
+    margin-top: 8px;
+  }
+  .booking-screen .checkout-note {
+    margin-top: 6px;
+  }
+}
+
+/* Let long schema fields scroll inside their card instead of widening the page. */
+.schema-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.schema-card {
+  min-width: 0;
+}
+.schema-card > code {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 540px) {
+  .schema-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Secondary text remains readable in both palettes. */
+[data-theme="light"]
+  :is(
+    .edition,
+    .intro-line > .eyebrow,
+    .campus-label,
+    .editorial-heading > p,
+    .editorial-heading > p > span,
+    .discovery-strip > span,
+    .discovery-strip > button,
+    .section-top .eyebrow,
+    .result-count,
+    .category-tabs > button:not(.active),
+    .event-card-bottom small,
+    .manifesto .eyebrow,
+    .manifesto-small,
+    .main-footer > span,
+    .modal-top .eyebrow,
+    .auth-content > p,
+    .segmented > button,
+    .demo-access > span,
+    .demo-access > button
+  ) {
+  color: #62665c;
+}
+[data-theme="light"] .manifesto .serif-word {
+  color: #40533e;
+}
+.main-footer .brand {
+  opacity: 1;
+}
+[data-theme="light"]
+  :is(
+    .eyebrow,
+    .create-capacity > span,
+    .create-capacity b,
+    .back-button,
+    .booking-heading > p,
+    .live-indicator,
+    .stage > span,
+    .seat.available,
+    .seat-legend > span,
+    .seat-note > span,
+    .seat-note small,
+    .order-meta > span,
+    .event-description,
+    .order-row,
+    .order-row b,
+    .checkout-note,
+    .system-status b,
+    .system-status > span,
+    .metric > div > span,
+    .metric > p,
+    .service-item b,
+    .service-item small,
+    .system-tabs > button,
+    .arch-index,
+    .arch-node:not(.dark-node) > span,
+    .arch-node:not(.dark-node) > small,
+    .schema-card > code,
+    .schema-card > pre,
+    .api-reference code,
+    .api-reference > div > span:last-child,
+    .api-reference > p,
+    .lab-note b,
+    .lab-note p,
+    .lab-note a
+  ) {
+  color: #62665c;
+}
+/* These badges keep pale backgrounds in either theme. */
+:is(
+  .health-pill,
+  .system-tabs > button > span,
+  .method,
+  .create-capacity > span,
+  .create-capacity b
+) {
+  color: #40533e;
+}
+.state-step > i {
+  color: #40533e;
+}
+.pill:not(.translucent) {
+  color: #40533e;
+}
+@media (min-width: 541px) and (max-width: 760px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 60;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    padding: 7px max(12px, env(safe-area-inset-right))
+      max(9px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    justify-content: space-around;
+  }
+  .mobile-bottom-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 6px 12px;
+    min-height: 44px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+  .mobile-bottom-nav button.selected {
+    color: var(--violet);
+  }
+  .main-shell {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+[data-theme="light"]
+  :is(
+    .ticket-details > span,
+    .ticket-seat > span,
+    .ticket-seat b,
+    .ticket-validation code,
+    .ticket-validation small,
+    .mock-note,
+    .delivery-status
+  ) {
+  color: #62665c;
+}
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea,
+  .search-box input,
+  .sort-label select {
+    font-size: 16px;
+  }
+  .seat {
+    width: 44px;
+    height: 44px;
+    font-size: 12px;
+  }
+  .seat-grid,
+  .stage {
+    min-width: 600px;
+  }
+}

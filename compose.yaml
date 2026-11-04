@@ -18,75 +18,65 @@ x-service: &service
 services:
   mongo:
     image: mongo:7
-    ports: ['127.0.0.1:27017:27017']
+    ports: ["127.0.0.1:27017:27017"]
     volumes: [mongo-data:/data/db]
     healthcheck:
-      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping").ok']
+      test:
+        ["CMD", "mongosh", "--quiet", "--eval", 'db.adminCommand("ping").ok']
       interval: 5s
       timeout: 5s
       retries: 20
   redis:
     image: redis:7-alpine
-    command: ['redis-server', '--appendonly', 'yes', '--maxmemory-policy', 'noeviction']
-    ports: ['127.0.0.1:6379:6379']
+    command:
+      [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--maxmemory-policy",
+        "noeviction",
+      ]
+    ports: ["127.0.0.1:6379:6379"]
     volumes: [redis-data:/data]
     healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
+      test: ["CMD", "redis-cli", "ping"]
       interval: 3s
       timeout: 3s
       retries: 20
   mailpit:
     image: axllent/mailpit:v1.27
-    ports: ['127.0.0.1:8025:8025', '127.0.0.1:1025:1025']
+    ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
   auth:
     <<: *service
-    command: ['node', 'services/auth-service/server.js']
+    command: ["node", "backend/services/auth-service/server.js"]
     environment:
       <<: *env
       MONGO_URI: mongodb://mongo:27017/eventpass_auth
   catalog:
     <<: *service
-    command: ['node', 'services/catalog-service/server.js']
+    command: ["node", "backend/services/catalog-service/server.js"]
     environment:
       <<: *env
       MONGO_URI: mongodb://mongo:27017/eventpass_catalog
   booking:
     <<: *service
-    command: ['node', 'services/booking-service/server.js']
+    command: ["node", "backend/services/booking-service/server.js"]
     environment:
       <<: *env
       MONGO_URI: mongodb://mongo:27017/eventpass_booking
   notifications:
     <<: *service
-    command: ['node', 'services/notification-service/server.js']
+    command: ["node", "backend/services/notification-service/server.js"]
     environment:
       <<: *env
       MONGO_URI: mongodb://mongo:27017/eventpass_notifications
       SMTP_HOST: mailpit
       SMTP_PORT: 1025
-  shortener-1:
-    profiles: [url-shortener]
-    <<: *service
-    command: ['node', 'services/shortener-service/server.js']
-    environment:
-      <<: *env
-      PORT: 5005
-      INSTANCE_ID: shortener-1
-      MONGO_URI: mongodb://mongo:27017/eventpass_links
-  shortener-2:
-    profiles: [url-shortener]
-    <<: *service
-    command: ['node', 'services/shortener-service/server.js']
-    environment:
-      <<: *env
-      PORT: 5005
-      INSTANCE_ID: shortener-2
-      MONGO_URI: mongodb://mongo:27017/eventpass_links
   gateway:
     build:
       context: .
       target: gateway
-    ports: ['127.0.0.1:${GATEWAY_PORT:-8080}:80']
+    ports: ["127.0.0.1:${GATEWAY_PORT:-8080}:80"]
     depends_on: [auth, catalog, booking, notifications]
 volumes:
   mongo-data:

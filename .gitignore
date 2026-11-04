@@ -9,3 +9,7 @@ build/
 artifacts/
 *.pem
 *.key
+
+tmp/
+.vercel/
+coverage/

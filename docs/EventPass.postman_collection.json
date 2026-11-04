@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "EventPass \u00b7 Semester Project",
-    "description": "EventPass authentication, catalog, Redis reservations, tickets and email delivery. The URL shortener is a separate assignment.",
+    "description": "EventPass authentication, catalog, Redis reservations, tickets and email delivery.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -24,10 +24,6 @@
     {
       "key": "seatId",
       "value": "A2"
-    },
-    {
-      "key": "code",
-      "value": ""
     }
   ],
   "item": [

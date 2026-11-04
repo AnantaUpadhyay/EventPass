@@ -1,0 +1,124 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite",
+      "installCommand": "cd .. && npm ci",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist",
+      "rewrites": [
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    "auth": {
+      "root": "backend/services/auth-service",
+      "framework": "express",
+      "entrypoint": "vercel.js",
+      "installCommand": "cd ../../.. && npm ci"
+    },
+    "catalog": {
+      "root": "backend/services/catalog-service",
+      "framework": "express",
+      "entrypoint": "vercel.js",
+      "installCommand": "cd ../../.. && npm ci",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "booking",
+          "format": "url",
+          "env": "BOOKING_URL"
+        }
+      ]
+    },
+    "booking": {
+      "root": "backend/services/booking-service",
+      "framework": "express",
+      "entrypoint": "vercel.js",
+      "installCommand": "cd ../../.. && npm ci",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "catalog",
+          "format": "url",
+          "env": "CATALOG_URL"
+        },
+        {
+          "type": "service",
+          "service": "notifications",
+          "format": "url",
+          "env": "NOTIFICATION_URL"
+        }
+      ]
+    },
+    "notifications": {
+      "root": "backend/services/notification-service",
+      "framework": "express",
+      "entrypoint": "vercel.js",
+      "installCommand": "cd ../../.. && npm ci",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "booking",
+          "format": "url",
+          "env": "BOOKING_URL"
+        }
+      ]
+    },
+    "gateway": {
+      "root": "backend/services/gateway",
+      "framework": "express",
+      "entrypoint": "server.js",
+      "installCommand": "cd ../../.. && npm ci",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "auth",
+          "format": "url",
+          "env": "AUTH_URL"
+        },
+        {
+          "type": "service",
+          "service": "catalog",
+          "format": "url",
+          "env": "CATALOG_URL"
+        },
+        {
+          "type": "service",
+          "service": "booking",
+          "format": "url",
+          "env": "BOOKING_URL"
+        },
+        {
+          "type": "service",
+          "service": "notifications",
+          "format": "url",
+          "env": "NOTIFICATION_URL"
+        }
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "gateway"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/notifications/cron",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

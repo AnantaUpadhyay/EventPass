@@ -4,3 +4,7 @@
 .env
 *.log
 artifacts
+tmp
+**/.env
+**/.env.*
+!**/.env.example
