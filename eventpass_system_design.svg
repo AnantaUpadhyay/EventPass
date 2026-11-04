@@ -1,0 +1,298 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 920" width="100%" height="100%" style="background:#ffffff; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <!-- Subtle Minimal Shadow -->
+    <filter id="subtleShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Clean Line Markers -->
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- Eraser Light Dot Grid -->
+  <pattern id="lightDots" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1" fill="#cbd5e1" opacity="0.5"/>
+  </pattern>
+  <rect width="1440" height="920" fill="url(#lightDots)"/>
+
+  <!-- Top Header Bar -->
+  <g transform="translate(60, 35)">
+    <rect x="0" y="0" width="1320" height="58" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#subtleShadow)"/>
+    <text x="24" y="36" font-size="18" font-weight="700" fill="#0f172a" letter-spacing="-0.3">EventPass · High-Level System Architecture</text>
+    <rect x="420" y="18" width="90" height="22" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="465" y="33" font-size="11" font-weight="600" fill="#475569" text-anchor="middle">Microservices</text>
+
+    <!-- Stack Pill Badges -->
+    <g transform="translate(860, 18)">
+      <rect x="0" y="0" width="75" height="22" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="37" y="15" font-size="11" font-weight="600" fill="#1d4ed8" text-anchor="middle">React JS</text>
+
+      <rect x="85" y="0" width="75" height="22" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="122" y="15" font-size="11" font-weight="600" fill="#334155" text-anchor="middle">Express</text>
+
+      <rect x="170" y="0" width="85" height="22" rx="4" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="212" y="15" font-size="11" font-weight="600" fill="#047857" text-anchor="middle">MongoDB</text>
+
+      <rect x="265" y="0" width="85" height="22" rx="4" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+      <text x="307" y="15" font-size="11" font-weight="600" fill="#b91c1c" text-anchor="middle">Redis (CP)</text>
+
+      <rect x="360" y="0" width="90" height="22" rx="4" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="405" y="15" font-size="11" font-weight="600" fill="#7e22ce" text-anchor="middle">NGINX LB</text>
+    </g>
+  </g>
+
+  <!-- ================= GROUP 1: CLIENT TIER ================= -->
+  <g transform="translate(60, 115)">
+    <rect width="215" height="745" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="18" y="28" font-size="12" font-weight="700" fill="#475569" letter-spacing="0.5">CLIENT TIER</text>
+
+    <!-- Node: React App -->
+    <g transform="translate(16, 45)" filter="url(#subtleShadow)">
+      <rect width="183" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="12" y="12" width="26" height="26" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="25" y="29" font-size="13" fill="#2563eb" text-anchor="middle">⚛</text>
+      <text x="46" y="25" font-size="13" font-weight="700" fill="#0f172a">React Web App</text>
+      <text x="46" y="38" font-size="10" fill="#64748b">Vite SPA (Port 3000)</text>
+      <line x1="12" y1="48" x2="171" y2="48" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="68" font-size="11" fill="#334155">• Interactive Seat Grid</text>
+      <text x="14" y="86" font-size="11" fill="#334155">• 10-Minute Lock Timer</text>
+      <text x="14" y="104" font-size="11" fill="#334155">• Real-Time Stock Updates</text>
+      <text x="14" y="122" font-size="11" fill="#334155">• JWT Token in Memory</text>
+      <text x="14" y="140" font-size="11" fill="#334155">• QR Code Ticket View</text>
+    </g>
+
+    <!-- Node: Mobile Users -->
+    <g transform="translate(16, 215)" filter="url(#subtleShadow)">
+      <rect width="183" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="12" y="12" width="26" height="26" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="25" y="29" font-size="13" fill="#475569" text-anchor="middle">📱</text>
+      <text x="46" y="25" font-size="13" font-weight="700" fill="#0f172a">Mobile Clients</text>
+      <text x="46" y="38" font-size="10" fill="#64748b">iOS / Android / Browser</text>
+      <line x1="12" y1="48" x2="171" y2="48" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="68" font-size="11" fill="#334155">• Flash Sale Traffic</text>
+      <text x="14" y="86" font-size="11" fill="#334155">• High Concurrency Spikes</text>
+    </g>
+
+    <!-- Student Explanation Box -->
+    <g transform="translate(16, 520)">
+      <rect width="183" height="195" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2"/>
+      <text x="14" y="26" font-size="11" font-weight="700" fill="#92400e">📌 Architectural Note</text>
+      <text x="14" y="48" font-size="10" font-weight="600" fill="#78350f">Stateless Client State:</text>
+      <text x="14" y="66" font-size="10" fill="#92400e">Clients hold signed JWTs.</text>
+      <text x="14" y="82" font-size="10" fill="#92400e">No server-side user</text>
+      <text x="14" y="98" font-size="10" fill="#92400e">session pinning required,</text>
+      <text x="14" y="114" font-size="10" fill="#92400e">allowing any backend</text>
+      <text x="14" y="130" font-size="10" fill="#92400e">node to fulfill any</text>
+      <text x="14" y="146" font-size="10" fill="#92400e">request seamlessly.</text>
+      <rect x="14" y="160" width="155" height="22" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+      <text x="91" y="175" font-size="10" font-weight="700" fill="#b45309" text-anchor="middle">Horizontal Scale Ready</text>
+    </g>
+  </g>
+
+  <!-- ================= GROUP 2: API GATEWAY & LB ================= -->
+  <g transform="translate(320, 115)">
+    <rect width="210" height="745" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="18" y="28" font-size="12" font-weight="700" fill="#475569" letter-spacing="0.5">GATEWAY &amp; LB</text>
+
+    <!-- NGINX Node -->
+    <g transform="translate(16, 45)" filter="url(#subtleShadow)">
+      <rect width="178" height="175" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="12" y="12" width="26" height="26" rx="5" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="25" y="29" font-size="13" fill="#7e22ce" text-anchor="middle">⇄</text>
+      <text x="46" y="25" font-size="13" font-weight="700" fill="#0f172a">NGINX Proxy</text>
+      <text x="46" y="38" font-size="10" fill="#64748b">Port 80 / 8080</text>
+      <line x1="12" y1="48" x2="171" y2="48" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="68" font-size="11" fill="#334155">• Round-Robin Balancer</text>
+      <text x="14" y="86" font-size="11" fill="#334155">• SSL Termination</text>
+      <text x="14" y="104" font-size="11" fill="#334155">• Health Check Monitor</text>
+      <text x="14" y="122" font-size="11" fill="#334155">• Rate Limiting (Token Bucket)</text>
+      <rect x="14" y="136" width="150" height="24" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="89" y="152" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">Max 100 req/min per IP</text>
+    </g>
+
+    <!-- Path Routing Box -->
+    <g transform="translate(16, 240)" filter="url(#subtleShadow)">
+      <rect width="178" height="225" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="14" y="26" font-size="12" font-weight="700" fill="#0f172a">Reverse Proxy Routes</text>
+      <line x1="12" y1="36" x2="171" y2="36" stroke="#f1f5f9" stroke-width="1.5"/>
+
+      <text x="14" y="56" font-size="10" font-family="monospace" font-weight="700" fill="#2563eb">/api/auth/*</text>
+      <text x="14" y="70" font-size="10" fill="#64748b">→ Auth Svc (Port 5001)</text>
+
+      <text x="14" y="96" font-size="10" font-family="monospace" font-weight="700" fill="#2563eb">/api/events/*</text>
+      <text x="14" y="110" font-size="10" fill="#64748b">→ Catalog Svc (Port 5002)</text>
+
+      <text x="14" y="136" font-size="10" font-family="monospace" font-weight="700" fill="#2563eb">/api/book/*</text>
+      <text x="14" y="150" font-size="10" fill="#64748b">→ Booking Svc (Port 5003)</text>
+
+      <text x="14" y="176" font-size="10" font-family="monospace" font-weight="700" fill="#2563eb">/health</text>
+      <text x="14" y="190" font-size="10" fill="#64748b">→ Instance Up/Down Ping</text>
+    </g>
+  </g>
+
+  <!-- ================= GROUP 3: MICROSERVICES ================= -->
+  <g transform="translate(575, 115)">
+    <rect width="380" height="745" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="20" y="28" font-size="12" font-weight="700" fill="#475569" letter-spacing="0.5">MICROSERVICES TIER (NODE / EXPRESS)</text>
+
+    <!-- Service 1: Auth -->
+    <g transform="translate(18, 45)" filter="url(#subtleShadow)">
+      <rect width="344" height="110" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="14" y="12" width="26" height="26" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="27" y="29" font-size="13" fill="#334155" text-anchor="middle">🔒</text>
+      <text x="48" y="25" font-size="13" font-weight="700" fill="#0f172a">Auth &amp; User Service</text>
+      <rect x="255" y="14" width="75" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="292" y="28" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Port: 5001</text>
+      <line x1="14" y1="46" x2="330" y2="46" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="66" font-size="11" fill="#334155">• Bcrypt Password Hashing + JWT Token Generation</text>
+      <text x="14" y="84" font-size="11" fill="#334155">• Role-Based Permissions: Student vs Event Organizer</text>
+      <text x="14" y="102" font-size="11" fill="#64748b">• Fully Stateless Instance</text>
+    </g>
+
+    <!-- Service 2: Catalog -->
+    <g transform="translate(18, 175)" filter="url(#subtleShadow)">
+      <rect width="344" height="125" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="14" y="12" width="26" height="26" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="27" y="29" font-size="13" fill="#2563eb" text-anchor="middle">🎪</text>
+      <text x="48" y="25" font-size="13" font-weight="700" fill="#0f172a">Event &amp; Catalog Service</text>
+      <rect x="255" y="14" width="75" height="20" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="292" y="28" font-size="10" font-weight="600" fill="#1d4ed8" text-anchor="middle">Port: 5002</text>
+      <line x1="14" y1="46" x2="330" y2="46" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="66" font-size="11" font-weight="600" fill="#1d4ed8">⚡ READ-HEAVY: Implements Cache-Aside Pattern</text>
+      <text x="14" y="84" font-size="11" fill="#334155">• Step 1: Reads from Redis Memory first (~1ms)</text>
+      <text x="14" y="102" font-size="11" fill="#334155">• Step 2: Cache Miss queries MongoDB and updates Redis (TTL: 1hr)</text>
+    </g>
+
+    <!-- Service 3: Booking -->
+    <g transform="translate(18, 320)" filter="url(#subtleShadow)">
+      <rect width="344" height="160" rx="8" fill="#ffffff" stroke="#f87171" stroke-width="1.5"/>
+      <rect x="14" y="12" width="26" height="26" rx="5" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+      <text x="27" y="29" font-size="13" fill="#dc2626" text-anchor="middle">🎫</text>
+      <text x="48" y="25" font-size="13" font-weight="700" fill="#0f172a">Booking &amp; Reservation Service</text>
+      <rect x="255" y="14" width="75" height="20" rx="4" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+      <text x="292" y="28" font-size="10" font-weight="600" fill="#b91c1c" text-anchor="middle">Port: 5003</text>
+      <line x1="14" y1="46" x2="330" y2="46" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="66" font-size="11" font-weight="700" fill="#b91c1c">🛡️ WRITE-HEAVY: Concurrency &amp; Race Condition Control</text>
+      <text x="14" y="84" font-size="11" fill="#334155">• Redis Distributed Lock: SETNX seat_lock (10m TTL)</text>
+      <text x="14" y="102" font-size="11" fill="#334155">• In-Memory Atomic Decrement (DECRBY seats 1)</text>
+      <text x="14" y="120" font-size="11" fill="#334155">• State Machine: CREATED → HELD (10m) → CONFIRMED</text>
+      <text x="14" y="138" font-size="10" fill="#b91c1c">Automatic Lock Expiration if payment times out</text>
+    </g>
+
+    <!-- Service 4: Notification -->
+    <g transform="translate(18, 500)" filter="url(#subtleShadow)">
+      <rect width="344" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+      <rect x="14" y="12" width="26" height="26" rx="5" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="27" y="29" font-size="13" fill="#059669" text-anchor="middle">🔔</text>
+      <text x="48" y="25" font-size="13" font-weight="700" fill="#0f172a">Notification Worker</text>
+      <rect x="255" y="14" width="75" height="20" rx="4" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="292" y="28" font-size="10" font-weight="600" fill="#047857" text-anchor="middle">Port: 5004</text>
+      <line x1="14" y1="46" x2="330" y2="46" stroke="#f1f5f9" stroke-width="1.5"/>
+      <text x="14" y="66" font-size="11" fill="#334155">• Async Event Consumer (Non-blocking decouple)</text>
+      <text x="14" y="84" font-size="11" fill="#334155">• Ticket QR Code Generator &amp; Email Dispatch</text>
+    </g>
+  </g>
+
+  <!-- ================= GROUP 4: REDIS (MEMORY & LOCKS) ================= -->
+  <g transform="translate(995, 115)">
+    <rect width="385" height="360" rx="10" fill="#fffafa" stroke="#fecaca" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="20" y="28" font-size="12" font-weight="700" fill="#b91c1c" letter-spacing="0.5">REDIS (CP IN-MEMORY LAYER)</text>
+
+    <!-- Redis Box 1 -->
+    <g transform="translate(16, 45)" filter="url(#subtleShadow)">
+      <rect width="353" height="80" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#b91c1c">1. Distributed Lock (SETNX)</text>
+      <text x="14" y="44" font-size="10" font-family="monospace" fill="#dc2626">SET lock:event:101:seat:25 user_87 NX EX 600</text>
+      <text x="14" y="64" font-size="10" fill="#475569">Acquires lock in $O(1)$. Holds seat for 10 mins during checkout.</text>
+    </g>
+
+    <!-- Redis Box 2 -->
+    <g transform="translate(16, 140)" filter="url(#subtleShadow)">
+      <rect width="353" height="80" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#b91c1c">2. Atomic Inventory Decrement</text>
+      <text x="14" y="44" font-size="10" font-family="monospace" fill="#dc2626">DECRBY event:101:seats 1</text>
+      <text x="14" y="64" font-size="10" fill="#475569">Stops at 0 tickets in memory. ZERO queries reach MongoDB if sold out.</text>
+    </g>
+
+    <!-- Redis Box 3 -->
+    <g transform="translate(16, 235)" filter="url(#subtleShadow)">
+      <rect width="353" height="80" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#b91c1c">3. Catalog Cache-Aside</text>
+      <text x="14" y="44" font-size="10" font-family="monospace" fill="#dc2626">GET event:101  →  Sub-2ms Response</text>
+      <text x="14" y="64" font-size="10" fill="#475569">Absorbs 95% browse requests without overloading database.</text>
+    </g>
+  </g>
+
+  <!-- ================= GROUP 5: MONGODB (PERSISTENCE) ================= -->
+  <g transform="translate(995, 495)">
+    <rect width="385" height="365" rx="10" fill="#f6fef9" stroke="#a7f3d0" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="20" y="28" font-size="12" font-weight="700" fill="#047857" letter-spacing="0.5">MONGODB (PERSISTENT DATA LAYER)</text>
+
+    <!-- Mongo Box 1 -->
+    <g transform="translate(16, 45)" filter="url(#subtleShadow)">
+      <rect width="353" height="80" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#047857">1. Users Collection</text>
+      <text x="14" y="44" font-size="10" fill="#334155">Schema: { _id, email, passwordHash, role, createdAt }</text>
+      <text x="14" y="64" font-size="10" font-weight="600" fill="#059669">Unique Index on { email: 1 }</text>
+    </g>
+
+    <!-- Mongo Box 2 -->
+    <g transform="translate(16, 140)" filter="url(#subtleShadow)">
+      <rect width="353" height="85" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#047857">2. Events Collection</text>
+      <text x="14" y="44" font-size="10" fill="#334155">Schema: { _id, title, venue, totalSeats, availableSeats, price }</text>
+      <text x="14" y="64" font-size="10" font-weight="600" fill="#059669">Compound Index on { date: 1, availableSeats: 1 }</text>
+    </g>
+
+    <!-- Mongo Box 3 -->
+    <g transform="translate(16, 240)" filter="url(#subtleShadow)">
+      <rect width="353" height="95" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+      <text x="14" y="24" font-size="12" font-weight="700" fill="#047857">3. Bookings Collection</text>
+      <text x="14" y="44" font-size="10" fill="#334155">Schema: { _id, userId, eventId, seatNumber, status, qrUrl }</text>
+      <text x="14" y="64" font-size="10" fill="#475569">Status: "CONFIRMED" | "EXPIRED"</text>
+      <text x="14" y="80" font-size="10" font-weight="600" fill="#059669">Multi-Document ACID Transaction upon payment confirmation</text>
+    </g>
+  </g>
+
+  <!-- ================= CLEAN ARROWS & LABELS ================= -->
+  <!-- Client to NGINX -->
+  <line x1="255" y1="180" x2="330" y2="180" stroke="#64748b" stroke-width="2" marker-end="url(#arrowGray)"/>
+  <rect x="270" y="169" width="48" height="18" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="294" y="182" font-size="9" font-weight="600" fill="#475569" text-anchor="middle">HTTPS</text>
+
+  <!-- NGINX to Services -->
+  <line x1="495" y1="200" x2="590" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowGray)"/>
+  <line x1="495" y1="375" x2="590" y2="375" stroke="#64748b" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+  <!-- Catalog to Redis (Red Line) -->
+  <path d="M 920 235 L 955 235 L 955 315 L 1005 315" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <rect x="930" y="265" width="55" height="18" rx="4" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="957" y="278" font-size="9" font-weight="700" fill="#dc2626" text-anchor="middle">Cache Hit</text>
+
+  <!-- Booking to Redis Lock (Red Line) -->
+  <path d="M 920 395 L 965 395 L 965 200 L 1005 200" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <rect x="932" y="375" width="66" height="18" rx="4" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+  <text x="965" y="388" font-size="9" font-weight="700" fill="#dc2626" text-anchor="middle">SETNX Lock</text>
+
+  <!-- Microservices to Mongo (Green Line) -->
+  <path d="M 920 550 L 955 550 L 955 640 L 1005 640" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <rect x="930" y="580" width="55" height="18" rx="4" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="957" y="593" font-size="9" font-weight="700" fill="#047857" text-anchor="middle">Final Write</text>
+
+  <!-- Bottom Legend -->
+  <g transform="translate(60, 875)">
+    <rect width="1320" height="35" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="20" y="22" font-size="11" font-weight="700" fill="#475569">SYSTEM TRADEOFFS &amp; DESIGN RULES:</text>
+    <text x="240" y="22" font-size="11" fill="#334155">1. CP Mode in CAP Theorem (Seat correctness over availability)</text>
+    <text x="640" y="22" font-size="11" fill="#334155">2. Cache-Aside Pattern for 95% DB read offload</text>
+    <text x="960" y="22" font-size="11" fill="#334155">3. Stateless Node APIs + NGINX Round Robin LB</text>
+  </g>
+</svg>

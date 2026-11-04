@@ -1,0 +1,106 @@
+# Use the VS Code REST Client extension, or import the Postman collection.
+# Obtain a JWT from Login and paste it into @token. Never paste it into public sites.
+@base = http://localhost:8080
+@token = paste-login-token-here
+@adminToken = paste-organizer-token-here
+@eventId = evt_neon_nights_2026
+@seatId = A2
+@checkoutKey = lab-checkout-unique-key-0001
+@code = paste-created-code-here
+
+### Register — role is always student
+POST {{base}}/api/auth/register
+Content-Type: application/json
+
+{"name":"Lab Student","email":"lab-student@example.test","password":"secure-demo-password"}
+
+### Login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{"email":"student@college.edu","password":"student123"}
+
+### My profile
+GET {{base}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### Catalog — optional category and literal search
+GET {{base}}/api/catalog/events?category=All&search=
+
+### One event
+GET {{base}}/api/catalog/events/{{eventId}}
+
+### Live seat map — dimensions come from the event, never the query string
+GET {{base}}/api/booking/seats/{{eventId}}
+Authorization: Bearer {{token}}
+
+### Hold — 600-second lease
+POST {{base}}/api/booking/hold
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"eventId":"{{eventId}}","seatId":"{{seatId}}"}
+
+### Confirm — reuse this exact key when retrying this checkout
+POST {{base}}/api/booking/confirm
+Authorization: Bearer {{token}}
+Idempotency-Key: {{checkoutKey}}
+Content-Type: application/json
+
+{"eventId":"{{eventId}}","seatId":"{{seatId}}"}
+
+### Release — only a still-held seat owned by this user
+POST {{base}}/api/booking/release
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"eventId":"{{eventId}}","seatId":"{{seatId}}"}
+
+### My tickets
+GET {{base}}/api/booking/mine
+Authorization: Bearer {{token}}
+
+### My email delivery records
+GET {{base}}/api/notifications/mine
+Authorization: Bearer {{token}}
+
+### Live service health
+GET {{base}}/api/health/booking
+
+### Cache metrics
+GET {{base}}/api/catalog/metrics
+
+### Hold metrics
+GET {{base}}/api/booking/metrics
+
+### Organizer login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{"email":"organizer@college.edu","password":"student123"}
+
+### Admin event creation
+POST {{base}}/api/catalog/events
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{"title":"Campus Design Night","description":"A creative campus gathering.","category":"Workshop","venue":"Studio 4","date":"2099-11-20","time":"18:00 IST","price":99,"seatLayout":{"rows":5,"seatsPerRow":10}}
+
+### Admin email delivery log
+GET {{base}}/api/notifications/logs
+Authorization: Bearer {{adminToken}}
+
+### Hold multiple seats atomically (1–10 unique IDs)
+POST {{base}}/api/booking/hold
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"eventId":"{{eventId}}","seatIds":["A2","A3"]}
+
+### Confirm the entire group with one idempotency key
+POST {{base}}/api/booking/confirm
+Authorization: Bearer {{token}}
+Idempotency-Key: group-checkout-unique-0001
+Content-Type: application/json
+
+{"eventId":"{{eventId}}","seatIds":["A2","A3"]}

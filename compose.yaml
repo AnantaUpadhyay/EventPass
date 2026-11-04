@@ -1,0 +1,93 @@
+x-service: &service
+  build:
+    context: .
+    target: service
+  restart: unless-stopped
+  environment: &env
+    JWT_SECRET: ${JWT_SECRET:?Create .env first (see .env.example)}
+    INTERNAL_API_KEY: ${INTERNAL_API_KEY:?Create .env first}
+    REDIS_URL: redis://redis:6379
+    CATALOG_URL: http://catalog:5002
+    BOOKING_URL: http://booking:5003
+    SEED_DEMO: ${SEED_DEMO:-true}
+  depends_on:
+    mongo:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+services:
+  mongo:
+    image: mongo:7
+    ports: ['127.0.0.1:27017:27017']
+    volumes: [mongo-data:/data/db]
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping").ok']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: ['redis-server', '--appendonly', 'yes', '--maxmemory-policy', 'noeviction']
+    ports: ['127.0.0.1:6379:6379']
+    volumes: [redis-data:/data]
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports: ['127.0.0.1:8025:8025', '127.0.0.1:1025:1025']
+  auth:
+    <<: *service
+    command: ['node', 'services/auth-service/server.js']
+    environment:
+      <<: *env
+      MONGO_URI: mongodb://mongo:27017/eventpass_auth
+  catalog:
+    <<: *service
+    command: ['node', 'services/catalog-service/server.js']
+    environment:
+      <<: *env
+      MONGO_URI: mongodb://mongo:27017/eventpass_catalog
+  booking:
+    <<: *service
+    command: ['node', 'services/booking-service/server.js']
+    environment:
+      <<: *env
+      MONGO_URI: mongodb://mongo:27017/eventpass_booking
+  notifications:
+    <<: *service
+    command: ['node', 'services/notification-service/server.js']
+    environment:
+      <<: *env
+      MONGO_URI: mongodb://mongo:27017/eventpass_notifications
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+  shortener-1:
+    profiles: [url-shortener]
+    <<: *service
+    command: ['node', 'services/shortener-service/server.js']
+    environment:
+      <<: *env
+      PORT: 5005
+      INSTANCE_ID: shortener-1
+      MONGO_URI: mongodb://mongo:27017/eventpass_links
+  shortener-2:
+    profiles: [url-shortener]
+    <<: *service
+    command: ['node', 'services/shortener-service/server.js']
+    environment:
+      <<: *env
+      PORT: 5005
+      INSTANCE_ID: shortener-2
+      MONGO_URI: mongodb://mongo:27017/eventpass_links
+  gateway:
+    build:
+      context: .
+      target: gateway
+    ports: ['127.0.0.1:${GATEWAY_PORT:-8080}:80']
+    depends_on: [auth, catalog, booking, notifications]
+volumes:
+  mongo-data:
+  redis-data:

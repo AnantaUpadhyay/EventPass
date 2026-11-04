@@ -1,0 +1,15 @@
+{
+  "name": "catalog-service",
+  "version": "1.0.0",
+  "description": "EventPass Event & Catalog Microservice with Cache-Aside Redis",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1",
+    "redis": "^4.6.13"
+  }
+}

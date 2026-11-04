@@ -1,0 +1,12 @@
+const router = require('express').Router();
+const { asyncRoute, auth } = require('../../../../shared/http');
+const c = require('../controllers/booking.controller');
+router.get('/metrics', (req, res) => res.json(require('../config/redis').metrics));
+router.use(auth);
+router.get('/seats/:eventId', asyncRoute(c.getEventSeatMap));
+router.post('/hold', asyncRoute(c.holdSeat));
+router.post('/release', asyncRoute(c.releaseSeat));
+router.post('/confirm', asyncRoute(c.confirmBooking));
+router.get('/mine', asyncRoute(c.getUserBookings));
+router.get('/user/:userId', asyncRoute(c.getUserBookings));
+module.exports = router;
