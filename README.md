@@ -57,6 +57,10 @@ Each local service has its own `server.js` and package manifest. The Vercel-only
 
 Use `npm run dev:frontend` and `npm run dev:backend` in separate terminals if preferred. Install dependencies once from the repository root.
 
+## Appearance
+
+First visits use dark mode. Guests can save a browser preference; signed-in users save dark or light mode to their account, restored on their next login on any device.
+
 ## Reservation flow
 
 1. Clicking a seat requests a Redis hold immediately. The server validates the seat and authenticated owner.

@@ -20,17 +20,8 @@ import CreateEventPage from "./pages/CreateEventPage";
 import { api } from "./api";
 import { changeView } from "./motion";
 function AppContent() {
-  const { user, loading, logout } = useAuth();
+  const { user, loading, logout, theme, setTheme, themeSaving, themeError } = useAuth();
   const [page, setPage] = useState("discover");
-  const [theme, setTheme] = useState(
-    () =>
-      localStorage.getItem("ep_theme") ||
-      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
-  );
-  React.useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("ep_theme", theme);
-  }, [theme]);
   const [event, setEvent] = useState(null);
   const [authOpen, setAuthOpen] = useState(false);
   const [pendingEvent, setPendingEvent] = useState(null);
@@ -130,6 +121,8 @@ function AppContent() {
           <div className="topbar-right">
             <button
               className="icon-button theme-toggle"
+              disabled={themeSaving || loading}
+              aria-busy={themeSaving}
               aria-label={
                 theme === "dark"
                   ? "Switch to light mode"
@@ -167,6 +160,7 @@ function AppContent() {
           </div>
         </header>
         <main id="main" className="main-content" key={page}>
+          {themeError && <div className="error-message" role="alert">{themeError}</div>}
           {deepLinkError && (
             <div className="error-message" role="alert">
               {deepLinkError}

@@ -22,4 +22,5 @@ router.use(
 router.post("/register", asyncRoute(controller.register));
 router.post("/login", asyncRoute(controller.login));
 router.get("/me", auth, asyncRoute(controller.me));
+router.patch("/me/preferences", auth, asyncRoute(controller.preferences));
 module.exports = { router, redis };

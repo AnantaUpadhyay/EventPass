@@ -1,7 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      try {
+        if (localStorage.getItem("ep_guest_theme") === "light")
+          document.documentElement.dataset.theme = "light";
+      } catch {}
+    </script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -12,7 +18,7 @@
       content="Discover concerts, cinema, college festivals and live experiences. Book with EventPass or continue with the event provider."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <meta name="theme-color" content="#40533e" />
+    <meta name="theme-color" content="#000000" />
     <link
       rel="icon"
       type="image/png"

@@ -2,9 +2,38 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../api";
 const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
+  const [guestTheme, setGuestTheme] = useState(() => {
+    try { return localStorage.getItem("ep_guest_theme") === "light" ? "light" : "dark"; }
+    catch { return "dark"; }
+  });
+  const [themeSaving, setThemeSaving] = useState(false);
+  const [themeError, setThemeError] = useState("");
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(Boolean(token));
+  const theme = user ? (user.theme === "light" ? "light" : "dark") : guestTheme;
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#000000" : "#f4f1e9");
+  }, [theme]);
+  async function setTheme(nextTheme) {
+    if (themeSaving) return;
+    setThemeError("");
+    if (!token) {
+      setGuestTheme(nextTheme);
+      try { localStorage.setItem("ep_guest_theme", nextTheme); } catch {}
+      return;
+    }
+    setThemeSaving(true);
+    try {
+      const data = await api("/api/auth/me/preferences", {
+        token, method: "PATCH", body: { theme: nextTheme },
+      });
+      setUser(current => current?.id === data.user.id ? data.user : current);
+    } catch (err) {
+      setThemeError("Could not save your appearance preference. Please try again.");
+    } finally { setThemeSaving(false); }
+  }
   useEffect(() => {
     if (!token) {
       setLoading(false);
@@ -26,6 +55,8 @@ export function AuthProvider({ children }) {
     };
   }, [token]);
   function save(data) {
+    setThemeError("");
+    setLoading(true);
     setUser(data.user);
     setToken(data.token);
   }
@@ -44,6 +75,7 @@ export function AuthProvider({ children }) {
     save(data);
   }
   function logout() {
+    setThemeError("");
     setUser(null);
     setToken(null);
     localStorage.removeItem("ep_token");
@@ -51,7 +83,7 @@ export function AuthProvider({ children }) {
   }
   return (
     <AuthContext.Provider
-      value={{ user, token, loading, login, register, logout }}
+      value={{ user, token, loading, login, register, logout, theme, setTheme, themeSaving, themeError }}
     >
       {children}
     </AuthContext.Provider>

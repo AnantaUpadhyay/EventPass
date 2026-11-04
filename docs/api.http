@@ -7,6 +7,13 @@
 @seatId = A2
 @checkoutKey = lab-checkout-unique-key-0001
 
+### Save appearance for the authenticated account
+PATCH {{base}}/api/auth/me/preferences
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"theme":"light"}
+
 ### Register — role is always student
 POST {{base}}/api/auth/register
 Content-Type: application/json

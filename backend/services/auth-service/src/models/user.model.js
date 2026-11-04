@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     enum: ["student", "organizer", "admin"],
     default: "student",
   },
+  theme: { type: String, enum: ["dark", "light"], default: "dark" },
   createdAt: { type: Date, default: Date.now },
 });
 

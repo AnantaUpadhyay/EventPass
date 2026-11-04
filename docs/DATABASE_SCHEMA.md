@@ -4,7 +4,7 @@ Each service owns a logical MongoDB database. ID references across services are 
 
 | Database / collection | Fields | Indexes and constraints |
 | --- | --- | --- |
-| `eventpass_auth.users` | `_id` ObjectId; `name`; normalized `email`; bcrypt `passwordHash`; `role`; `createdAt` | Unique email; role enum student/organizer/admin; public signup fixes student |
+| `eventpass_auth.users` | `_id` ObjectId; `name`; normalized `email`; bcrypt `passwordHash`; `role`; `theme` (dark/light, default dark); `createdAt` | Unique email; role enum student/organizer/admin; public signup fixes student |
 | `eventpass_catalog.events` | String `_id`; title; description; category; venue; ISO date; local IST time; INR price; bannerUrl; totalSeats; seatLayout; timestamps | Date/category index; nonnegative price; 1–400 capacity; 1–20 rows and columns |
 | `eventpass_booking.bookings` | bookingId; requestId; userId; userName; userEmail; eventId; eventTitle; eventDate; eventTime; venue; bannerUrl; seatNumber; price snapshot; status; ticketCode; QR PNG data URI; bookedAt; embedded outbox | Unique bookingId and ticketCode; unique `(userId, requestId)`; partial unique `(eventId, seatNumber)` when CONFIRMED; outbox status/time index |
 | `eventpass_notifications.notifications` | bookingId; userId; userEmail; eventTitle; status; attempts; leaseUntil; nextAttempt; messageId; lastError; sentAt; timestamps | Unique bookingId; worker claim uses atomic findOneAndUpdate |

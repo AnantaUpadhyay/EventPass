@@ -6,6 +6,7 @@ const view = (user) => ({
   name: user.name,
   email: user.email,
   role: user.role,
+  theme: user.theme || "dark",
 });
 function credentials(body, registering = false) {
   const { name, email, password } = body;
@@ -47,6 +48,19 @@ exports.login = async (req, res) => {
 };
 exports.me = async (req, res) => {
   const user = await User.findById(req.user.id);
+  if (!user) throw fail(401, "Account not found. Please sign in again.");
+  res.json({ user: view(user) });
+};
+
+exports.preferences = async (req, res) => {
+  const { theme } = req.body || {};
+  if (theme !== "dark" && theme !== "light")
+    throw fail(400, "Choose dark or light mode.");
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $set: { theme } },
+    { new: true, runValidators: true },
+  );
   if (!user) throw fail(401, "Account not found. Please sign in again.");
   res.json({ user: view(user) });
 };
