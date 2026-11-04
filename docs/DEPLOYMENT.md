@@ -21,7 +21,7 @@ Verify the public deployment before relying on it: catalog search, signup/login,
 
 ## Third-party discovery
 
-Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `GEMINI_MODEL` defaults to `gemini-3.8-flash`; choose another currently supported Search-grounding model only after checking Google's documentation. The catalog service calls Google's Interactions API with Google Search and structured output. A live provider call must be checked after key setup; unit fixtures do not establish live search availability.
+Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `GEMINI_MODEL` defaults to `gemini-3.5-flash`; choose another currently supported Search-grounding model only after checking Google's documentation. The catalog service calls Google's Interactions API with Google Search and structured output. A live provider call must be checked after key setup; unit fixtures do not establish live search availability.
 
 `GET /api/catalog/discovery/options` lists supported cities and categories. Authenticated `GET /api/catalog/discovery?city=Noida&q=music&category=All` returns externally hosted event listings. Choosing a city starts the search automatically; name searches submit explicitly.
 

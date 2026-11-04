@@ -127,7 +127,7 @@ async function searchEvents(
   { city, query, category },
   {
     apiKey,
-    model = process.env.GEMINI_MODEL || "gemini-3.8-flash",
+    model = process.env.GEMINI_MODEL || "gemini-3.5-flash",
     fetchImpl = fetch,
   } = {},
 ) {
