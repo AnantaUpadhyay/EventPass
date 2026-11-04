@@ -273,7 +273,7 @@ export default function BookingPage({ event, onBack, onBooked }) {
           </div>
         </section>
         <aside className="order-panel">
-          <img src={event.bannerUrl} alt="" className="order-cover" />
+          {event.bannerUrl && <img src={event.bannerUrl} alt="" className="order-cover" />}
           <div className="order-content">
             <span className="eyebrow">EVENT DETAILS</span>
             <h2>{event.title}</h2>

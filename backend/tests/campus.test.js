@@ -43,3 +43,20 @@ test("signed organizer tokens include their university scope", () => {
   auth(req, {}, error => assert.equal(error, undefined));
   assert.equal(req.user.universityId, "bennett");
 });
+
+test("festival imagery has source credits and valid local responsive JPEG assets", () => {
+  const fs = require("node:fs"), path = require("node:path");
+  for (const event of listings.filter(item => item.image)) {
+    const image = event.image;
+    assert(["photograph", "artwork"].includes(image.type));
+    assert(image.alt && image.caption && image.credit);
+    assert.equal(new URL(image.sourceUrl).protocol, "https:");
+    assert.equal(new URL(image.originalUrl).protocol, "https:");
+    for (const asset of [image.src, image.thumbnail]) {
+      assert(/^\/assets\/fests\/[a-z0-9-]+\.jpg$/.test(asset));
+      const bytes = fs.readFileSync(path.join(__dirname, "../../frontend/public", asset));
+      assert.equal(bytes[0], 0xff); assert.equal(bytes[1], 0xd8);
+      assert(bytes.length > 1000);
+    }
+  }
+});

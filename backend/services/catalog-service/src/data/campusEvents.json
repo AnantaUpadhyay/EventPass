@@ -36,7 +36,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 960,
+      "height": 539,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 337,
+      "src": "/assets/fests/du-business-conclave.jpg",
+      "thumbnail": "/assets/fests/du-business-conclave-600.jpg",
+      "alt": "Students and college officials at SRCC Business Conclave 2025",
+      "credit": "Hindustan Times",
+      "sourceUrl": "https://www.hindustantimes.com/business/business-conclave-2025-igniting-leadership-inspiring-excellenceuntitled-story-101742301319439.html",
+      "originalUrl": "https://www.hindustantimes.com/ht-img/img/2025/03/18/960x540/Business_Conclave_SRCC_1742301540957_1742301555271.jpeg",
+      "caption": "Business Conclave 2025 · College archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_du-crossroads",
@@ -49,7 +63,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 640,
+      "height": 427,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/du-crossroads.jpg",
+      "thumbnail": "/assets/fests/du-crossroads-600.jpg",
+      "alt": "Festival audience at SRCC Crossroads 2017",
+      "credit": "Hindustan Times",
+      "sourceUrl": "https://www.hindustantimes.com/delhi/crossroads-17-how-shri-ram-college-of-commerce-rocked-du-s-north-campus/story-lq41RXJJKv76Xkdjt7rpEN.html",
+      "originalUrl": "https://images.hindustantimes.com/rf/image_size_640x362/HT/p2/2017/03/16/Pictures/_88d0d928-0a16-11e7-ba13-f6aef3964879.JPG",
+      "caption": "Crossroads 2017 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bennett-uphoria",
@@ -62,7 +90,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 458,
+      "height": 305,
+      "thumbnailWidth": 458,
+      "thumbnailHeight": 305,
+      "src": "/assets/fests/bennett-uphoria.jpg",
+      "thumbnail": "/assets/fests/bennett-uphoria-600.jpg",
+      "alt": "Students celebrating at Uphoria 2024",
+      "credit": "Bennett University",
+      "sourceUrl": "https://www.bennett.edu.in/bennett-life/life-at-campus/university-events/uphoria/",
+      "originalUrl": "https://www.bennett.edu.in/wp-content/uploads/2024/03/Uphoria-2024-1.jpg",
+      "caption": "Uphoria 2024 · University archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bennett-zenevia",
@@ -75,7 +117,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 750,
+      "height": 501,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 401,
+      "src": "/assets/fests/bennett-zenevia.jpg",
+      "thumbnail": "/assets/fests/bennett-zenevia-600.jpg",
+      "alt": "Drummers and students at the Uphoria–Zenevia festival launch",
+      "credit": "Bennett University",
+      "sourceUrl": "https://www.bennett.edu.in/media-center/blog/rolling-revelation-of-annual-cultural-and-tech-fest-at-bennett-university/",
+      "originalUrl": "https://www.bennett.edu.in/wp-content/uploads/2022/09/Uphoria-2.jpg",
+      "caption": "Uphoria–Zenevia 2022 · University archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bennett-hackday",
@@ -88,7 +144,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 541,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 270,
+      "src": "/assets/fests/bennett-hackday.jpg",
+      "thumbnail": "/assets/fests/bennett-hackday-600.jpg",
+      "alt": "FOSS Club BU hackathon participants",
+      "credit": "FOSS Club BU / FOSS United",
+      "sourceUrl": "https://platform.fossunited.org/c/bennett-university/hacktoberfest-hackday-2026",
+      "originalUrl": "https://platform.fossunited.org/files/IMG-20241119-WA003406e315.jpg",
+      "caption": "Hack Day · Organizer archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitd-tryst",
@@ -101,7 +171,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 801,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/iitd-tryst.jpg",
+      "thumbnail": "/assets/fests/iitd-tryst-600.jpg",
+      "alt": "Speakers on stage at TRYST, IIT Delhi",
+      "credit": "CAIC, IIT Delhi",
+      "sourceUrl": "https://caic.iitd.ac.in/tryst/",
+      "originalUrl": "https://caic.iitd.ac.in/media/gallery/Three-MGKqBTlS.jpeg",
+      "caption": "TRYST · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitd-rendezvous",
@@ -114,7 +198,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 634,
+      "height": 402,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 380,
+      "src": "/assets/fests/iitd-rendezvous.jpg",
+      "thumbnail": "/assets/fests/iitd-rendezvous-600.jpg",
+      "alt": "Rendezvous festival crowd at IIT Delhi",
+      "credit": "Studynama",
+      "sourceUrl": "https://www.studynama.com/rendezvous16-iit-delhi-cultural-fest-2016/",
+      "originalUrl": "https://www.studynama.com/wp-content/uploads/2016/07/Rendezvous-2016-iit-delhi-cult-fest-1.jpg",
+      "caption": "Rendezvous 2016 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitb-techfest",
@@ -127,7 +225,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 675,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 337,
+      "src": "/assets/fests/iitb-techfest.jpg",
+      "thumbnail": "/assets/fests/iitb-techfest-600.jpg",
+      "alt": "Robot DJ performance at Techfest 2024, IIT Bombay",
+      "credit": "DJ Robotics",
+      "sourceUrl": "https://dj-robotics.jp/en/news/TECHFEST2024_EN",
+      "originalUrl": "https://storage.googleapis.com/studio-cms-assets/projects/1Va644YMO7/s-1440x810_v-fms_webp_d1c1d7f7-2f74-4ad7-b166-9f26072cb81c.jpg",
+      "caption": "Techfest 2024 · Performance archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitb-techconnect",
@@ -140,7 +252,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 900,
+      "height": 1200,
+      "thumbnailWidth": 450,
+      "thumbnailHeight": 600,
+      "src": "/assets/fests/iitb-techconnect.jpg",
+      "thumbnail": "/assets/fests/iitb-techconnect-600.jpg",
+      "alt": "Official TechConnect 2026 programme artwork",
+      "credit": "IRCC, IIT Bombay",
+      "sourceUrl": "https://rnd.iitb.ac.in/techconnect/en/",
+      "originalUrl": "https://rnd.iitb.ac.in/techconnect/media/images/techconnect/post.linkedin/2026/0001.jpg",
+      "caption": "TechConnect 2026 · Official artwork",
+      "type": "artwork"
+    }
   },
   {
     "_id": "campus_iitk-techkriti",
@@ -153,7 +279,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 799,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 399,
+      "src": "/assets/fests/iitk-techkriti.jpg",
+      "thumbnail": "/assets/fests/iitk-techkriti-600.jpg",
+      "alt": "Lamp-lighting ceremony at Techkriti, IIT Kanpur",
+      "credit": "IIT Kanpur",
+      "sourceUrl": "https://www.iitk.ac.in/dora/institute-news",
+      "originalUrl": "https://www.iitk.ac.in/dora/imag/institute-news/techkriti-6.jpg",
+      "caption": "Techkriti · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitm-esummit",
@@ -166,7 +306,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/iitm-esummit.jpg",
+      "thumbnail": "/assets/fests/iitm-esummit-600.jpg",
+      "alt": "Entrepreneurship Development Drive participants and organizers",
+      "credit": "E-Cell, IIT Madras",
+      "sourceUrl": "https://ecell.iitm.ac.in/event/edd",
+      "originalUrl": "https://ecell.iitm.ac.in/images/edd/EDD%20photos/EDD%20Gallery_1%2025-26.JPG",
+      "caption": "EDD 2025–26 · Organizer archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bits-apogee",
@@ -179,7 +333,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 737,
+      "height": 704,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 573,
+      "src": "/assets/fests/bits-apogee.jpg",
+      "thumbnail": "/assets/fests/bits-apogee-600.jpg",
+      "alt": "APOGEE 2024 performances, panel discussion and project showcase",
+      "credit": "BITS Pilani / BITSology",
+      "sourceUrl": "https://www.bits-pilani.ac.in/BITSology/BITSology-April-2024/",
+      "originalUrl": "https://www.bits-pilani.ac.in/BITSology/BITSology-April-2024/assets/images/common/apogee-d3.png",
+      "caption": "APOGEE 2024 · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bits-aic",
@@ -205,7 +373,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1024,
+      "height": 683,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/bits-oasis.jpg",
+      "thumbnail": "/assets/fests/bits-oasis-600.jpg",
+      "alt": "Oasis stage, lights and festival audience at BITS Pilani",
+      "credit": "Youth Inc",
+      "sourceUrl": "https://youthincmag.com/oasis-2025-whispers-of-edo-a-celebration-of-culture-and-creativity",
+      "originalUrl": "https://media.youthincmag.com/images/d81065b4-f8f5-45f7-8c6c-c3428c7aed0e/original.jpg",
+      "caption": "Oasis · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_dtu-engifest",
@@ -218,7 +400,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/dtu-engifest.jpg",
+      "thumbnail": "/assets/fests/dtu-engifest-600.jpg",
+      "alt": "Traditional dance performance at Engifest 2020",
+      "credit": "DTU Studio / DTU",
+      "sourceUrl": "https://www.dtu.ac.in/Web/programme/engifest2020/",
+      "originalUrl": "https://www.dtu.ac.in/Web/programme/engifest2020/photo/img10.JPG",
+      "caption": "Engifest 2020 · University archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_dtu-yuvaan",
@@ -231,7 +427,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1137,
+      "height": 640,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 337,
+      "src": "/assets/fests/dtu-yuvaan.jpg",
+      "thumbnail": "/assets/fests/dtu-yuvaan-600.jpg",
+      "alt": "Students gathered in the DTU amphitheatre for Yuvaan",
+      "credit": "Literacy Council, DTU",
+      "sourceUrl": "https://www.dtu.ac.in/Web/Community/l_council.php",
+      "originalUrl": "https://www.dtu.ac.in/Web/Community/literacy_council/img12.jpg",
+      "caption": "Yuvaan · University archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nsut-moksha",
@@ -244,7 +454,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 675,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 337,
+      "src": "/assets/fests/nsut-moksha.jpg",
+      "thumbnail": "/assets/fests/nsut-moksha-600.jpg",
+      "alt": "Performers on stage at NSUT Moksha 2024",
+      "credit": "Hindustan Times",
+      "sourceUrl": "https://www.hindustantimes.com/htcity/htcity-delhi-junction/nsut-fest-sunidhi-chauhan-king-raftaar-take-to-stage-chaos-ensues-101710483919600.html",
+      "originalUrl": "https://www.hindustantimes.com/ht-img/img/2024/03/15/1600x900/nsut_fest_1710484229606_1710484249234.jpg",
+      "caption": "Moksha 2024 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nsut-innovision",
@@ -257,7 +481,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 800,
+      "height": 600,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 450,
+      "src": "/assets/fests/nsut-innovision.jpg",
+      "thumbnail": "/assets/fests/nsut-innovision-600.jpg",
+      "alt": "NSUT students and speaker at an Innovision–Moksha session",
+      "credit": "Rajarshi Chakravorty / LinkedIn",
+      "sourceUrl": "https://www.linkedin.com/posts/raj-chakravorty_i-had-an-amazing-experience-at-the-nsut-campus-activity-7172826903748308992-YOis",
+      "originalUrl": "https://media.licdn.com/dms/image/v2/D5622AQHJtIb6bczBTg/feedshare-shrink_800/feedshare-shrink_800/0/1710134408526?e=2147483647&t=HWHrldv1JHKOo1PCgyDuZK3rwHhUzGAWiuIqax352wE&v=beta",
+      "caption": "Innovision–Moksha 2024 · Speaker archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_aiims-pulse",
@@ -270,7 +508,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1140,
+      "height": 500,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 263,
+      "src": "/assets/fests/aiims-pulse.jpg",
+      "thumbnail": "/assets/fests/aiims-pulse-600.jpg",
+      "alt": "Fashion presentation on the AIIMS Pulse festival stage",
+      "credit": "AIIMS Pulse archive",
+      "sourceUrl": "https://aiimspulse2016.wordpress.com/",
+      "originalUrl": "https://aiimspulse2016.files.wordpress.com/2016/03/img_8778_cover.jpg",
+      "caption": "Pulse 2016 · Organizer archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitt-pragyan",
@@ -283,7 +535,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/nitt-pragyan.jpg",
+      "thumbnail": "/assets/fests/nitt-pragyan-600.jpg",
+      "alt": "Panel discussion on stage at Pragyan 2026",
+      "credit": "Youth Inc",
+      "sourceUrl": "https://youthincmag.com/pragyan-26-at-nit-tiruchirappalli-a-celebration-of-technology-ideas-and-innovation",
+      "originalUrl": "https://media.youthincmag.com/images/51717022-3bfa-4d1d-b385-75bb4e1011b4/large.webp",
+      "caption": "Pragyan 2026 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitt-festember",
@@ -296,7 +562,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 630,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 315,
+      "src": "/assets/fests/nitt-festember.jpg",
+      "thumbnail": "/assets/fests/nitt-festember-600.jpg",
+      "alt": "Performer and audience at Festember, NIT Trichy",
+      "credit": "DT Next",
+      "sourceUrl": "https://www.dtnext.in/news/tamilnadu/nit-trichys-festember-to-kick-off-tomorrow-740143",
+      "originalUrl": "https://gumlet-images.assettype.com/dt-next%2Fimport%2Fh-upload%2F2023%2F10%2F05%2F769869-nit.webp?ar=40%3A21&auto=format%2Ccompress&enlarge=true&mode=crop&ogImage=true&overlay=false&overlay_position=bottom&overlay_width=100&w=1200",
+      "caption": "Festember · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitk-engineer",
@@ -309,7 +589,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/nitk-engineer.jpg",
+      "thumbnail": "/assets/fests/nitk-engineer-600.jpg",
+      "alt": "Virtual-reality demonstration at ENGINEER 2024",
+      "credit": "NITK Surathkal",
+      "sourceUrl": "https://x.com/surathkal_nitk/status/1847179555779596749",
+      "originalUrl": "https://pbs.twimg.com/media/GaJ-P08WAAAqR2W.jpg",
+      "caption": "ENGINEER 2024 · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitk-incident",
@@ -322,7 +616,21 @@
     "date": null,
     "endDate": null,
     "checkedAt": "2026-11-04",
-    "external": true
+    "external": true,
+    "image": {
+      "width": 600,
+      "height": 600,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 600,
+      "src": "/assets/fests/nitk-incident.jpg",
+      "thumbnail": "/assets/fests/nitk-incident-600.jpg",
+      "alt": "Concert lights and audience at NITK Incident",
+      "credit": "Incident / Unstop gallery",
+      "sourceUrl": "https://unstop.com/college-fests/incident-2022-national-institute-of-technology-karnataka-nitk-surathkal-21420",
+      "originalUrl": "https://d8it4huxumps7.cloudfront.net/uploads/images/festival/gallery/6217334047a72_3.jpeg?d=600x600",
+      "caption": "Incident · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_ssit-quantum",
@@ -335,7 +643,21 @@
     "endDate": "2026-12-04",
     "description": "The organizer announces a quantum hackathon for college teams at SSIT, Tumakuru. Check the event page for eligibility, preparation and entry requirements.",
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 630,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 315,
+      "src": "/assets/fests/ssit-quantum.jpg",
+      "thumbnail": "/assets/fests/ssit-quantum-600.jpg",
+      "alt": "Official National Quantum Fest 2026 event announcement",
+      "credit": "QARC, SSIT",
+      "sourceUrl": "https://nationalquantumfest.com/",
+      "originalUrl": "https://nationalquantumfest.com/og/home-3.jpg",
+      "caption": "National Quantum Fest 2026 · Official artwork",
+      "type": "artwork"
+    }
   },
   {
     "_id": "campus_aiims-nbrcom",
@@ -361,7 +683,21 @@
     "endDate": "2026-11-21",
     "description": "The organizer lists scientific presentations at JL Auditorium, AIIMS New Delhi. Check eligibility and registration with the conference organizer.",
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 320,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 160,
+      "src": "/assets/fests/aiims-nmscon.jpg",
+      "thumbnail": "/assets/fests/aiims-nmscon-600.jpg",
+      "alt": "Official NMSCON 2026 conference banner",
+      "credit": "NMSCON organizers",
+      "sourceUrl": "https://www.nmscon.com/abstract",
+      "originalUrl": "https://www.nmscon.com/images/NMS-CON2026.png",
+      "caption": "NMSCON 2026 · Official artwork",
+      "type": "artwork"
+    }
   },
   {
     "_id": "campus_iitkgp-kshitij",
@@ -374,7 +710,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 1200,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 600,
+      "src": "/assets/fests/iitkgp-kshitij.jpg",
+      "thumbnail": "/assets/fests/iitkgp-kshitij-600.jpg",
+      "alt": "Kshitij 2025 festival photo montage",
+      "credit": "Kshitij, IIT Kharagpur",
+      "sourceUrl": "https://x.com/ktj_iitkgp/status/2008594015323881767",
+      "originalUrl": "https://pbs.twimg.com/media/G9_1mz6bcAA7_ZD.jpg",
+      "caption": "Kshitij 2025 · Organizer archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitkgp-springfest",
@@ -387,7 +737,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/iitkgp-springfest.jpg",
+      "thumbnail": "/assets/fests/iitkgp-springfest-600.jpg",
+      "alt": "Spring Fest stage at IIT Kharagpur",
+      "credit": "IIT Kharagpur",
+      "sourceUrl": "https://international.iitkgp.ac.in/campus-life/",
+      "originalUrl": "https://international.iitkgp.ac.in/static/website/img/campus/Fest%204.jpg",
+      "caption": "Spring Fest · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitr-cognizance",
@@ -400,7 +764,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1000,
+      "height": 600,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 360,
+      "src": "/assets/fests/iitr-cognizance.jpg",
+      "thumbnail": "/assets/fests/iitr-cognizance-600.jpg",
+      "alt": "Technology exhibition at Cognizance 2022, IIT Roorkee",
+      "credit": "The Hans India",
+      "sourceUrl": "https://www.thehansindia.com/hans/young-hans/cognizance-iit-r-present-nino-an-intelligent-humanoid-robot-735213",
+      "originalUrl": "https://assets.thehansindia.com/h-upload/2022/03/26/1283729-robo.webp",
+      "caption": "Cognizance 2022 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_iitr-thomso",
@@ -413,7 +791,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 600,
+      "height": 400,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/iitr-thomso.jpg",
+      "thumbnail": "/assets/fests/iitr-thomso-600.jpg",
+      "alt": "Thomso concert stage and crowd at IIT Roorkee",
+      "credit": "Thomso / Unstop gallery",
+      "sourceUrl": "https://unstop.com/college-fests/thomso-indian-institute-of-technology-iit-roorkee-141573",
+      "originalUrl": "https://d8it4huxumps7.cloudfront.net/uploads/images/festival/gallery/66ca641285ea9_34edf2b9-e5fd-42a3-8181-50f19378acae.jpeg?d=600x600",
+      "caption": "Thomso · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bitsgoa-quark",
@@ -426,7 +818,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/bitsgoa-quark.jpg",
+      "thumbnail": "/assets/fests/bitsgoa-quark-600.jpg",
+      "alt": "Quark festival crowd and confetti at BITS Goa",
+      "credit": "Quark / BITS Goa",
+      "sourceUrl": "https://bits-quark.org/",
+      "originalUrl": "https://bits-quark.org/img/nights-min.jpg",
+      "caption": "Quark · Organizer archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitw-technozion",
@@ -439,7 +845,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 694,
+      "height": 416,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 359,
+      "src": "/assets/fests/nitw-technozion.jpg",
+      "thumbnail": "/assets/fests/nitw-technozion-600.jpg",
+      "alt": "Team Mechaholics vehicle demonstration at Technozion 2025",
+      "credit": "Deccan Chronicle",
+      "sourceUrl": "https://www.deccanchronicle.com/southern-states/telangana/rockets-to-racing-cars-technozion-2025-ignites-innovation-at-nit-1912540",
+      "originalUrl": "https://www.deccanchronicle.com/h-upload/2025/10/25/1971136-25-puli-2a.jpg",
+      "caption": "Technozion 2025 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitr-innovision",
@@ -452,7 +872,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/nitr-innovision.jpg",
+      "thumbnail": "/assets/fests/nitr-innovision-600.jpg",
+      "alt": "Innovision 2022 stage at NIT Rourkela",
+      "credit": "Student Activity Center, NIT Rourkela",
+      "sourceUrl": "https://sac.nitrkl.ac.in/societies",
+      "originalUrl": "https://ik.imagekit.io/tvfucug8t/315944295_683489136672980_8046188745263207622_n_1.png?updatedAt=1678715474291",
+      "caption": "Innovision 2022 · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_nitr-nitrutsav",
@@ -465,7 +899,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 800,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 400,
+      "src": "/assets/fests/nitr-nitrutsav.jpg",
+      "thumbnail": "/assets/fests/nitr-nitrutsav-600.jpg",
+      "alt": "Nitrutsav 2026 festival launch at NIT Rourkela",
+      "credit": "NIT Rourkela",
+      "sourceUrl": "https://x.com/nitrourkela/status/2020095213792841961",
+      "originalUrl": "https://pbs.twimg.com/media/HAjOZS8akAAQwGa.jpg",
+      "caption": "Nitrutsav 2026 · Institute archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bitsh-atmos",
@@ -478,7 +926,21 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 1200,
+      "height": 703,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 351,
+      "src": "/assets/fests/bitsh-atmos.jpg",
+      "thumbnail": "/assets/fests/bitsh-atmos-600.jpg",
+      "alt": "ATMOS inauguration guests and students at BITS Hyderabad",
+      "credit": "Telangana Today",
+      "sourceUrl": "https://telanganatoday.com/hyderabad-bits-pilani-comes-alive-on-first-day-of-its-annual-technical-fest-atmos",
+      "originalUrl": "https://media.telanganatoday.com/wp-content/uploads/2022/11/BITS-3.jpg",
+      "caption": "ATMOS 2022 · Festival archive",
+      "type": "photograph"
+    }
   },
   {
     "_id": "campus_bitsh-pearl",
@@ -491,6 +953,20 @@
     "date": null,
     "endDate": null,
     "external": true,
-    "checkedAt": "2026-11-04"
+    "checkedAt": "2026-11-04",
+    "image": {
+      "width": 600,
+      "height": 600,
+      "thumbnailWidth": 600,
+      "thumbnailHeight": 600,
+      "src": "/assets/fests/bitsh-pearl.jpg",
+      "thumbnail": "/assets/fests/bitsh-pearl-600.jpg",
+      "alt": "Pearl festival audience at BITS Hyderabad",
+      "credit": "ETimes Photogallery",
+      "sourceUrl": "https://photogallery.indiatimes.com/events/hyderabad/pearl-cultural-fest-at-bits-pilani-hyderabad/jonita-gandhi/articleshow/63530513.cms",
+      "originalUrl": "https://static.toiimg.com/photo/63530515.cms?imgsize=225359",
+      "caption": "Pearl 2018 · Festival archive",
+      "type": "photograph"
+    }
   }
 ]

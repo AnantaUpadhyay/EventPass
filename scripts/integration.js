@@ -154,7 +154,11 @@ async function main() {
   const campusEvents = await req("/api/catalog/campus/events?universityId=bennett&track=Tech&upcoming=true");
   assert(campusEvents.data.events.some(e => e._id === eventId));
   assert(campusEvents.data.events.every(e => e.universityId === "bennett" && e.academicTrack === "Tech" && e.date));
-  passed("University sign-in, admin-only organizer approval, scoped publishing and academic filters");
+  const otherCampus = await req("/api/catalog/campus/events?universityId=du", { token: users[0].token });
+  assert.equal(otherCampus.status, 200);
+  assert(otherCampus.data.events.length > 0);
+  assert(otherCampus.data.events.every(event => event.universityId === "du"));
+  passed("University sign-in, admin-only organizer approval, scoped publishing, academic labels and cross-university browsing");
   const reviewPath = `/api/catalog/events/${eventId}/reviews`;
   assert.equal((await req(reviewPath, { method: "PUT", body: { rating: 5 } })).status, 401);
   for (let i = 0; i < 2; i++) assert.equal((await req(reviewPath, {

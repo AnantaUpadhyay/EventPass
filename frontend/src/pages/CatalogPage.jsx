@@ -328,11 +328,11 @@ function EventCard({ event, index, onSelect }) {
       <div
         className={`event-photo category-${event.category.split(" ")[0].toLowerCase()}`}
       >
-        <img
+        {(event.bannerUrl || !event.universityId) && <img
           src={event.bannerUrl || "/assets/eventpass-hackathon.jpg"}
           alt=""
           loading="lazy"
-        />
+        />}
         <span className="category-badge">{event.category}</span>
         <span className="event-open">
           <ArrowUpRight size={21} />

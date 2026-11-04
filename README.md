@@ -59,7 +59,7 @@ Use `npm run dev:frontend` and `npm run dev:backend` in separate terminals if pr
 
 ## Universities and community
 
-The Universities screen supports Indian campus selection and academic-area filters (Tech, Humanities, Commerce, Medicine, Culture, Sports and Interdisciplinary). Students select a university when signing up or signing in. Existing accounts can attach a university on their first university-based sign-in; later sign-ins must match it. This selection does not verify affiliation.
+The Universities screen groups events by Indian institution, with academic-area labels on each card (Tech, Humanities, Commerce, Medicine, Culture, Sports and Interdisciplinary). Students can browse every university, with an optional university filter and a My university shortcut. Students select a university when signing up or signing in. Existing accounts can attach a university on their first university-based sign-in; later sign-ins must match it. This selection does not verify affiliation.
 
 Applicants can request organizer access during signup. An admin reviews pending requests in Universities and verifies authority independently before approving. Approved organizers sign in again and can publish only for their assigned university; admins can publish across universities. New campus events appear in the directory and normal booking catalog.
 

@@ -3,12 +3,12 @@ import { ArrowUpRight, GraduationCap } from "lucide-react";
 import { api, eventDate } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { PageTitle, ErrorMessage } from "../components/UI";
+import CampusEventImage from "../components/CampusEventImage";
 import EventReviews from "../components/EventReviews";
 export default function UniversityPage({ onSelectEvent, onSignIn }) {
   const { user, token, requestOrganizer } = useAuth();
-  const [options, setOptions] = useState({ universities: [], tracks: [] });
+  const [options, setOptions] = useState({ universities: [] });
   const [universityId, setUniversityId] = useState("");
-  const [track, setTrack] = useState("");
   const [search, setSearch] = useState("");
   const [upcoming, setUpcoming] = useState(false);
   const [events, setEvents] = useState([]);
@@ -22,13 +22,13 @@ export default function UniversityPage({ onSelectEvent, onSignIn }) {
     const controller = new AbortController();
     setLoading(true); setError("");
     const timer = setTimeout(() => {
-      api(`/api/catalog/campus/events?${new URLSearchParams({ universityId, track, search, upcoming: String(upcoming) })}`, { signal: controller.signal })
+      api(`/api/catalog/campus/events?${new URLSearchParams({ universityId, search, upcoming: String(upcoming) })}`, { signal: controller.signal })
         .then(data => setEvents(data.events))
         .catch(err => { if (!controller.signal.aborted) setError(err.message); })
         .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     }, 200);
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [universityId, track, search, upcoming]);
+  }, [universityId, search, upcoming]);
   useEffect(() => {
     if (user?.role === "admin") api("/api/auth/organizer-requests", { token }).then(data => setRequests(data.users)).catch(err => setError(err.message));
   }, [user?.role, token]);
@@ -40,11 +40,13 @@ export default function UniversityPage({ onSelectEvent, onSignIn }) {
       setApprovalNotice("Organizer approved. They must sign out and sign in again before publishing.");
     } catch (err) { setError(err.message); } finally { setBusy(""); }
   }
+  const universityGroups = options.universities.map(university => ({
+    ...university, events: events.filter(event => event.universityId === university.id),
+  })).filter(university => university.events.length);
   return <div className="university-page">
-    <PageTitle eyebrow="EVENTPASS / CAMPUS NETWORK" title="Across Indian campuses." description="Fests, hackathons, ideas and the people behind them. Explore institutions and find your academic community." />
+    <PageTitle eyebrow="EVENTPASS / CAMPUS NETWORK" title="Across Indian campuses." description="Fests, hackathons and academic events across Indian campuses. All students can explore every university’s events." />
     <section className="university-toolbar" aria-label="University event filters">
       <label>University<select value={universityId} onChange={e => setUniversityId(e.target.value)}><option value="">All universities</option>{options.universities.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}</select></label>
-      <label>Academic area<select value={track} onChange={e => setTrack(e.target.value)}><option value="">All areas</option>{options.tracks.map(item => <option key={item}>{item}</option>)}</select></label>
       <label>Search<input type="search" value={search} onChange={e => setSearch(e.target.value)} maxLength={120} placeholder="Fest, university or event" /></label>
       <label className="campus-checkbox"><input type="checkbox" checked={upcoming} onChange={e => setUpcoming(e.target.checked)} />Source-dated upcoming events only</label>
       {user?.universityId && <button className="text-button" onClick={() => setUniversityId(user.universityId)}>My university</button>}
@@ -68,16 +70,20 @@ export default function UniversityPage({ onSelectEvent, onSignIn }) {
     {loading ? <p role="status">Loading campus events…</p> : <>
       <p className="campus-count">{events.length} {events.length === 1 ? "listing" : "listings"}</p>
       {events.length === 0 && <p>No listings match these filters. Dates are added only when supported by a source or an approved organizer.</p>}
-      <div className="campus-event-grid">{events.map(event => <article className="campus-event" key={event._id}>
+      {universityGroups.map(group => <section className="university-event-group" key={group.id} aria-label={`${group.name} events`}>
+        <header className="university-group-heading"><div><span className="eyebrow">{group.city}</span><h2>{group.name}</h2></div><span>{group.events.length} {group.events.length === 1 ? "event" : "events"}</span></header>
+        <div className="campus-event-grid">{group.events.map(event => <article className="campus-event" key={event._id}>
+        <CampusEventImage event={event} />
         <div className="campus-event-top"><span><GraduationCap size={17} />{event.university?.shortName}</span><span>{event.academicTrack}</span></div>
         <span className={`campus-date-status ${event.status === "Upcoming" ? "upcoming" : ""}`}>{event.status}</span>
-        <h2>{event.title}</h2>
+        <h3>{event.title}</h3>
         <p className="campus-event-date">{event.date ? `${eventDate(event.date)}${event.endDate ? ' – ' + eventDate(event.endDate) : ''}` : "Next-edition dates not confirmed"}</p>
         <p>{event.description}</p>
         <p className="campus-form-note">{event.external ? `${event.kind} · Source-backed directory` : `Published by an approved university organizer · ${event.venue}`}</p>
         {event.external ? <a className="button outline small" href={event.sourceUrl} target="_blank" rel="noopener noreferrer">Official / organizer source <ArrowUpRight size={15} /></a> : <button className="button primary small" disabled={event.status !== "Upcoming"} onClick={() => onSelectEvent(event)}>Choose seats <ArrowUpRight size={15} /></button>}
         <EventReviews eventId={event._id} onSignIn={onSignIn} />
       </article>)}</div>
+      </section>)}
     </>}
   </div>;
 }
