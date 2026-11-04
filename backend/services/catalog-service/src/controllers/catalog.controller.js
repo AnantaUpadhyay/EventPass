@@ -59,6 +59,7 @@ exports.getEventById = async (req, res) => {
   res.json({ event });
 };
 exports.createEvent = async (req, res) => {
+  const { university, tracks } = require("../../../../shared/campus");
   const {
     title,
     description,
@@ -70,6 +71,12 @@ exports.createEvent = async (req, res) => {
     bannerUrl = "",
     seatLayout,
   } = req.body;
+  const universityId = req.user.role === "admin" ? req.body.universityId : req.user.universityId;
+  if (universityId && !university(universityId)) throw fail(400, "Choose a supported university.");
+  if (req.user.role !== "admin" && (!universityId || (req.body.universityId && req.body.universityId !== universityId)))
+    throw fail(403, "You can publish only for your approved university.");
+  const academicTrack = req.body.academicTrack || "Interdisciplinary";
+  if (!tracks.includes(academicTrack)) throw fail(400, "Choose a supported academic area.");
   const { rows, seatsPerRow } = seatLayout || {};
   if (
     ![rows, seatsPerRow].every(Number.isInteger) ||
@@ -107,6 +114,7 @@ exports.createEvent = async (req, res) => {
     bannerUrl,
     seatLayout,
     totalSeats: rows * seatsPerRow,
+    universityId, academicTrack, createdBy: req.user.id,
   });
   await cache.invalidate();
   res.status(201).json({ event });

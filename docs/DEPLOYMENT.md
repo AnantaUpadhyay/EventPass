@@ -28,3 +28,11 @@ Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `
 Only public HTTPS URLs present in Google's citation annotations are returned. Entries without a real calendar date in the next 60 days or a venue are dropped, and duplicate URLs are removed. This does not independently verify availability or establish a partnership with the source. Booking and payment occur on the provider's website. Google search suggestions are shown in a sandboxed frame without script access.
 
 Redis caches each city/query/category for 15 minutes and coordinates searches across instances. Fresh searches are limited to five per user per minute and 30 globally per UTC day by default. `DISCOVERY_DAILY_LIMIT` can change the daily limit (maximum 1000). A request consumes budget before calling Google; failed requests also count. Configure Google-side billing quotas separately. No API key is exposed to the browser.
+
+## University publishing
+
+Campus research is bundled with the catalog and needs no Gemini credentials. University IDs and areas are shared in `backend/shared/`. Auth tokens include the account university scope. Students can request organizer access at signup or from Universities; an admin must verify their authority independently before approval. Approval takes effect for publishing after a new login. University selection alone does not verify identity, email ownership or institutional affiliation.
+
+The initial site administrator must be provisioned on an existing account through a trusted database administration workflow. Public registration cannot grant admin or organizer roles. No bootstrap password or public role-promotion endpoint exists.
+
+Catalog startup initializes the unique review index. Reviews allow one 1–5 integer rating and optional comment per account and listing, with owner-scoped deletion, paginated reads and a Redis write limit. Native campus listings are capped at 200 per university/area filter until pagination is introduced.

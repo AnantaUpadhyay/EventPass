@@ -60,19 +60,23 @@ export function AuthProvider({ children }) {
     setUser(data.user);
     setToken(data.token);
   }
-  async function login(email, password) {
+  async function login(email, password, universityId) {
     const data = await api("/api/auth/login", {
       method: "POST",
-      body: { email, password },
+      body: { email, password, universityId },
     });
     save(data);
   }
-  async function register(name, email, password) {
+  async function register(name, email, password, universityId, organizerRequested = false) {
     const data = await api("/api/auth/register", {
       method: "POST",
-      body: { name, email, password },
+      body: { name, email, password, universityId, organizerRequested },
     });
     save(data);
+  }
+  async function requestOrganizer() {
+    const data = await api("/api/auth/organizer-requests", { token, method: "POST" });
+    setUser(current => current?.id === data.user.id ? data.user : current);
   }
   function logout() {
     setThemeError("");
@@ -83,7 +87,7 @@ export function AuthProvider({ children }) {
   }
   return (
     <AuthContext.Provider
-      value={{ user, token, loading, login, register, logout, theme, setTheme, themeSaving, themeError }}
+      value={{ user, token, loading, login, register, logout, theme, setTheme, themeSaving, themeError, requestOrganizer }}
     >
       {children}
     </AuthContext.Provider>

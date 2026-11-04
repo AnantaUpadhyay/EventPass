@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "EventPass \u00b7 Semester Project",
+    "name": "EventPass API",
     "description": "EventPass authentication, catalog, Redis reservations, tickets and email delivery.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -40,7 +40,7 @@
         "url": "{{baseUrl}}/api/auth/login",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"email\": \"student@college.edu\",\n  \"password\": \"student123\"\n}",
+          "raw": "{\n  \"email\": \"student@college.edu\",\n  \"password\": \"student123\",\n  \"universityId\": \"bennett\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -335,7 +335,7 @@
         "url": "{{baseUrl}}/api/auth/login",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"email\": \"organizer@college.edu\",\n  \"password\": \"student123\"\n}",
+          "raw": "{\n  \"email\": \"organizer@college.edu\",\n  \"password\": \"student123\",\n  \"universityId\": \"bennett\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -424,7 +424,7 @@
         "url": "{{baseUrl}}/api/auth/register",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"New Student\",\n  \"email\": \"student-{{$timestamp}}@example.test\",\n  \"password\": \"secure-demo-password\"\n}",
+          "raw": "{\n  \"name\": \"New Student\",\n  \"email\": \"student-{{$timestamp}}@example.test\",\n  \"password\": \"secure-demo-password\",\n  \"universityId\": \"bennett\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -463,6 +463,97 @@
             }
           }
         }
+      }
+    },
+    {
+      "name": "Universities and academic areas",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/catalog/universities"
+      }
+    },
+    {
+      "name": "University academic listings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/catalog/campus/events?universityId=bennett&track=Tech"
+      }
+    },
+    {
+      "name": "Read ratings and comments",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/catalog/events/campus_bennett-uphoria/reviews"
+      }
+    },
+    {
+      "name": "Save my rating and comment",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/catalog/events/campus_bennett-uphoria/reviews",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 5,\n  \"comment\": \"A memorable event.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Remove my review",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/catalog/events/campus_bennett-uphoria/reviews"
+      }
+    },
+    {
+      "name": "Pending organizer requests (admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/organizer-requests"
       }
     }
   ]

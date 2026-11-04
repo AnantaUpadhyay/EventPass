@@ -1,3 +1,4 @@
+import EventReviews from "../components/EventReviews";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -347,12 +348,12 @@ export default function BookingPage({ event, onBack, onBooked }) {
               </button>
             )}
             <p className="checkout-note">
-              <Info size={13} /> Semester project demo. No real payment
-              required.
+              <Info size={13} /> Demo checkout. No payment collected.
             </p>
           </div>
         </aside>
       </div>
+      <EventReviews eventId={event._id} />
     </div>
   );
 }

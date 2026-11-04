@@ -2,7 +2,7 @@ const { app, db, redis } = require("./src/app");
 const Event = require("./src/models/event.model");
 async function start() {
   await Promise.all([db.connect(), redis.connect()]);
-  await Event.init();
+  await Promise.all([Event.init(), require("./src/models/review.model").init()]);
   if (process.env.SEED_DEMO === "true") {
     const seeds = require("./src/data/seedEvents");
     await Event.bulkWrite(

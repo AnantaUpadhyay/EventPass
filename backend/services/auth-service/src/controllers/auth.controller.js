@@ -1,12 +1,15 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 const { fail, sign } = require("../../../../shared/http");
+const { university } = require("../../../../shared/campus");
 const view = (user) => ({
   id: String(user._id),
   name: user.name,
   email: user.email,
   role: user.role,
   theme: user.theme || "dark",
+  universityId: user.universityId || null,
+  organizerRequested: Boolean(user.organizerRequested),
 });
 function credentials(body, registering = false) {
   const { name, email, password } = body;
@@ -31,11 +34,14 @@ function credentials(body, registering = false) {
 }
 exports.register = async (req, res) => {
   const { name, email, password } = credentials(req.body, true);
+  if (!university(req.body.universityId)) throw fail(400, "Choose your university.");
   const user = await User.create({
     name,
     email,
     passwordHash: await bcrypt.hash(password, 12),
     role: "student",
+    universityId: req.body.universityId,
+    organizerRequested: req.body.organizerRequested === true,
   });
   res.status(201).json({ user: view(user), token: sign(user) });
 };
@@ -44,6 +50,13 @@ exports.login = async (req, res) => {
   const user = await User.findOne({ email });
   if (!user || !(await bcrypt.compare(password, user.passwordHash)))
     throw fail(401, "Email or password is incorrect.");
+  const selected = req.body.universityId;
+  if (selected !== undefined) {
+    if (!university(selected)) throw fail(400, "Choose your university.");
+    if (user.universityId && user.universityId !== selected)
+      throw fail(403, "This account belongs to a different university.");
+    if (!user.universityId) { user.universityId = selected; await user.save(); }
+  }
   res.json({ user: view(user), token: sign(user) });
 };
 exports.me = async (req, res) => {
@@ -62,5 +75,27 @@ exports.preferences = async (req, res) => {
     { new: true, runValidators: true },
   );
   if (!user) throw fail(401, "Account not found. Please sign in again.");
+  res.json({ user: view(user) });
+};
+
+exports.organizerRequests = async (req, res) => {
+  const users = await User.find({ organizerRequested: true, role: "student" })
+    .select("name email universityId organizerRequested role theme").limit(100);
+  res.json({ users: users.map(view) });
+};
+exports.approveOrganizer = async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    { _id: req.params.id, organizerRequested: true, role: "student", universityId: { $exists: true } },
+    { $set: { role: "organizer", organizerRequested: false } }, { new: true },
+  );
+  if (!user) throw fail(404, "Pending organizer request not found.");
+  res.json({ user: view(user) });
+};
+
+exports.requestOrganizer = async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (!user) throw fail(401, "Account not found. Please sign in again.");
+  if (!university(user.universityId)) throw fail(400, "Sign out and sign in with your university before requesting publishing access.");
+  if (user.role === "student") { user.organizerRequested = true; await user.save(); }
   res.json({ user: view(user) });
 };

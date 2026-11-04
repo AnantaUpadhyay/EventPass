@@ -15,6 +15,8 @@ const UserSchema = new mongoose.Schema({
     enum: ["student", "organizer", "admin"],
     default: "student",
   },
+  universityId: { type: String, enum: require("../../../../shared/universities.json").map(u => u.id), default: undefined },
+  organizerRequested: { type: Boolean, default: false },
   theme: { type: String, enum: ["dark", "light"], default: "dark" },
   createdAt: { type: Date, default: Date.now },
 });

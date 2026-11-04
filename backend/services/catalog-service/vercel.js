@@ -5,7 +5,7 @@ module.exports = require("../../shared/vercel")(app, async () => {
     db.ready() || db.connect(),
     redis.ready() || redis.connect(),
   ]);
-  await Event.init();
+  await Promise.all([Event.init(), require("./src/models/review.model").init()]);
   if (process.env.SEED_CATALOG === "true") {
     await Event.bulkWrite(
       require("./src/data/seedEvents").map((event) => ({

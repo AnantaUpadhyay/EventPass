@@ -55,6 +55,8 @@ async function main() {
         email,
         password: "a-safe-test-password",
         role: "admin",
+        universityId: "bennett",
+        organizerRequested: i === 0,
       },
     });
     assert.equal(response.status, 201);
@@ -76,6 +78,7 @@ async function main() {
         method: "POST",
         body: {
           name: "Duplicate",
+          universityId: "bennett",
           email: emails[0],
           password: "a-safe-test-password",
         },
@@ -118,13 +121,56 @@ async function main() {
     ).status,
     403,
   );
+  assert.equal((await req("/api/auth/organizer-requests", {
+    method: "POST", token: users[1].token,
+  })).data.user.organizerRequested, true);
+  const pending = await req("/api/auth/organizer-requests", { token: admin.data.token });
+  assert(pending.data.users.some(u => u.id === users[0].user.id));
+  assert.equal((await req(`/api/auth/organizer-requests/${users[0].user.id}/approve`, {
+    method: "PATCH", token: users[0].token,
+  })).status, 403);
+  assert.equal((await req(`/api/auth/organizer-requests/${users[0].user.id}/approve`, {
+    method: "PATCH", token: admin.data.token,
+  })).data.user.role, "organizer");
+  const organizer = await req("/api/auth/login", { method: "POST", body: {
+    email: emails[0], password: "a-safe-test-password", universityId: "bennett",
+  } });
+  assert.equal(organizer.data.user.universityId, "bennett");
+  assert.equal((await req("/api/auth/login", { method: "POST", body: {
+    email: emails[0], password: "a-safe-test-password", universityId: "du",
+  } })).status, 403);
+  assert.equal((await req("/api/catalog/events", { method: "POST", token: organizer.data.token,
+    body: { ...fixture, universityId: "du" },
+  })).status, 403);
+  fixture.universityId = "bennett";
+  fixture.academicTrack = "Tech";
   const created = await req("/api/catalog/events", {
     method: "POST",
-    token: admin.data.token,
+    token: organizer.data.token,
     body: fixture,
   });
   assert.equal(created.status, 201);
   eventId = created.data.event._id;
+  const campusEvents = await req("/api/catalog/campus/events?universityId=bennett&track=Tech&upcoming=true");
+  assert(campusEvents.data.events.some(e => e._id === eventId));
+  assert(campusEvents.data.events.every(e => e.universityId === "bennett" && e.academicTrack === "Tech" && e.date));
+  passed("University sign-in, admin-only organizer approval, scoped publishing and academic filters");
+  const reviewPath = `/api/catalog/events/${eventId}/reviews`;
+  assert.equal((await req(reviewPath, { method: "PUT", body: { rating: 5 } })).status, 401);
+  for (let i = 0; i < 2; i++) assert.equal((await req(reviewPath, {
+    method: "PUT", token: users[i].token, body: { rating: i ? 3 : 5, comment: "A thoughtful campus event <script>not HTML</script>" },
+  })).status, 200);
+  let reviews = await req(reviewPath);
+  assert.equal(reviews.data.count, 2); assert.equal(reviews.data.average, 4);
+  await req(reviewPath, { method: "PUT", token: users[0].token, body: { rating: 4, comment: "Updated review" } });
+  reviews = await req(reviewPath);
+  assert.equal(reviews.data.count, 2); assert.equal(reviews.data.average, 3.5);
+  assert.equal((await req(reviewPath, { method: "PUT", token: users[0].token, body: { rating: 6 } })).status, 400);
+  assert.equal((await req(reviewPath, { method: "DELETE", token: users[1].token })).status, 204);
+  reviews = await req(reviewPath);
+  assert.equal(reviews.data.count, 1); assert.equal(reviews.data.reviews[0].userId, users[0].user.id);
+  assert.equal((await req("/api/catalog/events/not-real/reviews")).status, 404);
+  passed("Persistent ratings, average/count, review replacement, validation and account-scoped deletion");
   const unknownSearch = await req(
     `/api/catalog/events?search=no-such-event-${runId}`,
   );
@@ -135,7 +181,7 @@ async function main() {
   assert.equal(cached.data.cached, true);
   assert.equal(cached.data.events[0]._id, eventId);
   passed(
-    "Admin event creation, empty searches, cache-aside hits, and seeded string IDs",
+    "Approved organizer event creation, empty searches, cache-aside hits, and seeded string IDs",
   );
   assert.equal(
     (
@@ -440,6 +486,7 @@ async function cleanup() {
       .find({ email: { $in: emails } })
       .toArray();
     const ids = users.map((u) => String(u._id));
+    await connection.useDb("eventpass_catalog").collection("reviews").deleteMany({ userId: { $in: ids } });
     await connection
       .useDb("eventpass_notifications")
       .collection("notifications")

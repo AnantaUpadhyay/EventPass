@@ -16,6 +16,7 @@ import CatalogPage from "./pages/CatalogPage";
 import BookingPage from "./pages/BookingPage";
 import TicketsPage from "./pages/TicketsPage";
 import DashboardPage from "./pages/DashboardPage";
+import UniversityPage from "./pages/UniversityPage";
 import CreateEventPage from "./pages/CreateEventPage";
 import { api } from "./api";
 import { changeView } from "./motion";
@@ -82,8 +83,9 @@ function AppContent() {
   };
   const nav = [
     ["discover", Compass, "Discover"],
+    ["campus", Compass, "Universities"],
     ["tickets", Ticket, "My tickets"],
-    ...(user?.role === "admin" ? [["create", Plus, "Create event"]] : []),
+    ...(["admin", "organizer"].includes(user?.role) ? [["create", Plus, "Create event"]] : []),
     ["system", Activity, "System overview"],
   ];
   return (
@@ -172,6 +174,7 @@ function AppContent() {
               onSignIn={() => setAuthOpen(true)}
             />
           )}
+          {page === "campus" && <UniversityPage onSelectEvent={select} onSignIn={() => setAuthOpen(true)} />}
           {page === "booking" && event && (
             <BookingPage
               event={event}
@@ -189,7 +192,7 @@ function AppContent() {
               />
             ))}
           {page === "system" && <DashboardPage />}
-          {page === "create" && user?.role === "admin" && (
+          {page === "create" && ["admin", "organizer"].includes(user?.role) && (
             <CreateEventPage onCreated={() => go("discover")} />
           )}
         </main>

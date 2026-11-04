@@ -18,7 +18,7 @@ Content-Type: application/json
 POST {{base}}/api/auth/register
 Content-Type: application/json
 
-{"name":"Lab Student","email":"lab-student@example.test","password":"secure-demo-password"}
+{"name":"Lab Student","universityId":"bennett","email":"lab-student@example.test","password":"secure-demo-password"}
 
 ### Login
 POST {{base}}/api/auth/login
@@ -116,4 +116,36 @@ GET {{base}}/api/catalog/discovery/options
 
 ### Real third-party events (requires Gemini server configuration)
 GET {{base}}/api/catalog/discovery?city=Noida&category=All&q=music
+Authorization: Bearer {{token}}
+
+### University options
+GET {{base}}/api/catalog/universities
+
+### University academic events
+GET {{base}}/api/catalog/campus/events?universityId=bennett&track=Tech&upcoming=false
+
+### Event ratings and comments (native or researched listing ID)
+GET {{base}}/api/catalog/events/campus_bennett-uphoria/reviews?page=1
+
+### Replace my rating and comment
+PUT {{base}}/api/catalog/events/campus_bennett-uphoria/reviews
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"rating":5,"comment":"A memorable campus festival."}
+
+### Delete only my review
+DELETE {{base}}/api/catalog/events/campus_bennett-uphoria/reviews
+Authorization: Bearer {{token}}
+
+### Pending organizer requests — admin only
+GET {{base}}/api/auth/organizer-requests
+Authorization: Bearer {{token}}
+
+### Approve organizer — admin only; replace user ID
+PATCH {{base}}/api/auth/organizer-requests/USER_ID/approve
+Authorization: Bearer {{token}}
+
+### Request organizer access for my existing campus account
+POST {{base}}/api/auth/organizer-requests
 Authorization: Bearer {{token}}

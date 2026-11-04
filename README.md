@@ -57,6 +57,16 @@ Each local service has its own `server.js` and package manifest. The Vercel-only
 
 Use `npm run dev:frontend` and `npm run dev:backend` in separate terminals if preferred. Install dependencies once from the repository root.
 
+## Universities and community
+
+The Universities screen supports Indian campus selection and academic-area filters (Tech, Humanities, Commerce, Medicine, Culture, Sports and Interdisciplinary). Students select a university when signing up or signing in. Existing accounts can attach a university on their first university-based sign-in; later sign-ins must match it. This selection does not verify affiliation.
+
+Applicants can request organizer access during signup. An admin reviews pending requests in Universities and verifies authority independently before approving. Approved organizers sign in again and can publish only for their assigned university; admins can publish across universities. New campus events appear in the directory and normal booking catalog.
+
+Each campus listing and native event has community ratings and comments. Signed-in users can save or replace one review and delete their own. Reviews persist in MongoDB; they are not claims of verified attendance.
+
+The researched directory works without Gemini. Every external listing links to an institution or organizer source. Recurring series with unknown next-edition dates are marked **Dates unconfirmed** and excluded by the upcoming-only filter. See [research notes](docs/CAMPUS_RESEARCH.md).
+
 ## Appearance
 
 First visits use dark mode. Guests can save a browser preference; signed-in users save dark or light mode to their account, restored on their next login on any device.

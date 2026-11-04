@@ -1,0 +1,122 @@
+[
+  {
+    "id": "du",
+    "name": "University of Delhi",
+    "shortName": "Delhi University",
+    "city": "Delhi"
+  },
+  {
+    "id": "bennett",
+    "name": "Bennett University",
+    "shortName": "Bennett",
+    "city": "Greater Noida"
+  },
+  {
+    "id": "iit-delhi",
+    "name": "Indian Institute of Technology Delhi",
+    "shortName": "IIT Delhi",
+    "city": "Delhi"
+  },
+  {
+    "id": "iit-bombay",
+    "name": "Indian Institute of Technology Bombay",
+    "shortName": "IIT Bombay",
+    "city": "Mumbai"
+  },
+  {
+    "id": "iit-kanpur",
+    "name": "Indian Institute of Technology Kanpur",
+    "shortName": "IIT Kanpur",
+    "city": "Kanpur"
+  },
+  {
+    "id": "iit-madras",
+    "name": "Indian Institute of Technology Madras",
+    "shortName": "IIT Madras",
+    "city": "Chennai"
+  },
+  {
+    "id": "iit-kharagpur",
+    "name": "Indian Institute of Technology Kharagpur",
+    "shortName": "IIT Kharagpur",
+    "city": "Kharagpur"
+  },
+  {
+    "id": "iit-roorkee",
+    "name": "Indian Institute of Technology Roorkee",
+    "shortName": "IIT Roorkee",
+    "city": "Roorkee"
+  },
+  {
+    "id": "bits-pilani",
+    "name": "BITS Pilani, Pilani Campus",
+    "shortName": "BITS Pilani",
+    "city": "Pilani"
+  },
+  {
+    "id": "bits-goa",
+    "name": "BITS Pilani, K. K. Birla Goa Campus",
+    "shortName": "BITS Goa",
+    "city": "Goa"
+  },
+  {
+    "id": "bits-hyderabad",
+    "name": "BITS Pilani, Hyderabad Campus",
+    "shortName": "BITS Hyderabad",
+    "city": "Hyderabad"
+  },
+  {
+    "id": "dtu",
+    "name": "Delhi Technological University",
+    "shortName": "DTU",
+    "city": "Delhi"
+  },
+  {
+    "id": "nsut",
+    "name": "Netaji Subhas University of Technology",
+    "shortName": "NSUT",
+    "city": "Delhi"
+  },
+  {
+    "id": "aiims-delhi",
+    "name": "All India Institute of Medical Sciences, New Delhi",
+    "shortName": "AIIMS Delhi",
+    "city": "Delhi"
+  },
+  {
+    "id": "nit-trichy",
+    "name": "National Institute of Technology Tiruchirappalli",
+    "shortName": "NIT Trichy",
+    "city": "Tiruchirappalli"
+  },
+  {
+    "id": "nit-surathkal",
+    "name": "National Institute of Technology Karnataka, Surathkal",
+    "shortName": "NIT Surathkal",
+    "city": "Surathkal"
+  },
+  {
+    "id": "nit-warangal",
+    "name": "National Institute of Technology Warangal",
+    "shortName": "NIT Warangal",
+    "city": "Warangal"
+  },
+  {
+    "id": "nit-rourkela",
+    "name": "National Institute of Technology Rourkela",
+    "shortName": "NIT Rourkela",
+    "city": "Rourkela"
+  },
+  {
+    "id": "ssit",
+    "name": "Sri Siddhartha Institute of Technology",
+    "shortName": "SSIT Tumakuru",
+    "city": "Tumakuru"
+  },
+  {
+    "id": "aiims-nagpur",
+    "name": "All India Institute of Medical Sciences, Nagpur",
+    "shortName": "AIIMS Nagpur",
+    "city": "Nagpur"
+  }
+]

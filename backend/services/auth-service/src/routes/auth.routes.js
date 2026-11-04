@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { asyncRoute, auth, fail } = require("../../../../shared/http");
+const { asyncRoute, auth, admin, fail } = require("../../../../shared/http");
 const controller = require("../controllers/auth.controller");
 // Redis rate limits coordinate across replicas and expire automatically.
 const redis = require("../../../../shared/redis")(require("redis"));
@@ -23,4 +23,7 @@ router.post("/register", asyncRoute(controller.register));
 router.post("/login", asyncRoute(controller.login));
 router.get("/me", auth, asyncRoute(controller.me));
 router.patch("/me/preferences", auth, asyncRoute(controller.preferences));
+router.post("/organizer-requests", auth, asyncRoute(controller.requestOrganizer));
+router.get("/organizer-requests", auth, admin, asyncRoute(controller.organizerRequests));
+router.patch("/organizer-requests/:id/approve", auth, admin, asyncRoute(controller.approveOrganizer));
 module.exports = { router, redis };

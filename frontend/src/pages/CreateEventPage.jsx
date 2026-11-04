@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../api";
 import { PageTitle, ErrorMessage } from "../components/UI";
 export default function CreateEventPage({ onCreated }) {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
+  const [options, setOptions] = useState({ universities: [], tracks: [] });
+  useEffect(() => { api("/api/catalog/universities").then(setOptions).catch(err => setError(err.message)); }, []);
   const [form, setForm] = useState({
     title: "",
+    universityId: user.universityId || "",
+    academicTrack: "Interdisciplinary",
     description: "",
     category: "Concert",
     venue: "",
@@ -53,6 +57,19 @@ export default function CreateEventPage({ onCreated }) {
       />
       <section className="create-event-panel">
         <form onSubmit={submit}>
+          <div className="form-two">
+            <label>University
+              <select name="universityId" value={form.universityId} onChange={change} required disabled={user.role !== "admin"}>
+                <option value="">Select university</option>
+                {options.universities.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+              </select>
+            </label>
+            <label>Academic area
+              <select name="academicTrack" value={form.academicTrack} onChange={change}>
+                {options.tracks.map(track => <option key={track}>{track}</option>)}
+              </select>
+            </label>
+          </div>
           <label>
             Event name
             <input
@@ -86,6 +103,9 @@ export default function CreateEventPage({ onCreated }) {
                   "Workshop",
                   "Sports & Gaming",
                   "Conference",
+                  "Cultural Fest",
+                  "Summit",
+                  "Academic Seminar",
                 ].map((v) => (
                   <option key={v}>{v}</option>
                 ))}

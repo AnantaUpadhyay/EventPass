@@ -4,10 +4,16 @@ Each service owns a logical MongoDB database. ID references across services are 
 
 | Database / collection | Fields | Indexes and constraints |
 | --- | --- | --- |
-| `eventpass_auth.users` | `_id` ObjectId; `name`; normalized `email`; bcrypt `passwordHash`; `role`; `theme` (dark/light, default dark); `createdAt` | Unique email; role enum student/organizer/admin; public signup fixes student |
-| `eventpass_catalog.events` | String `_id`; title; description; category; venue; ISO date; local IST time; INR price; bannerUrl; totalSeats; seatLayout; timestamps | Date/category index; nonnegative price; 1–400 capacity; 1–20 rows and columns |
+| `eventpass_auth.users` | `_id` ObjectId; `name`; normalized `email`; bcrypt `passwordHash`; `role`; `theme` (dark/light, default dark); `universityId`; `organizerRequested`; `createdAt` | Unique email; role enum student/organizer/admin; public signup fixes student |
+| `eventpass_catalog.events` | String `_id`; `universityId`; `academicTrack`; `createdBy`; title; description; category; venue; ISO date; local IST time; INR price; bannerUrl; totalSeats; seatLayout; timestamps | Date/category index; nonnegative price; 1–400 capacity; 1–20 rows and columns |
 | `eventpass_booking.bookings` | bookingId; requestId; userId; userName; userEmail; eventId; eventTitle; eventDate; eventTime; venue; bannerUrl; seatNumber; price snapshot; status; ticketCode; QR PNG data URI; bookedAt; embedded outbox | Unique bookingId and ticketCode; unique `(userId, requestId)`; partial unique `(eventId, seatNumber)` when CONFIRMED; outbox status/time index |
 | `eventpass_notifications.notifications` | bookingId; userId; userEmail; eventTitle; status; attempts; leaseUntil; nextAttempt; messageId; lastError; sentAt; timestamps | Unique bookingId; worker claim uses atomic findOneAndUpdate |
+
+University references use IDs from `backend/shared/universities.json`. Affiliation is self-reported. Organizer access requires admin approval; public registration always creates a student. A refreshed sign-in token carries the approved university scope.
+
+`eventpass_catalog.reviews` stores `eventId`, `userId`, `userName`, `universityId`, integer `rating` (1–5), `comment` (up to 2,000 characters), and timestamps. A unique `(eventId, userId)` index enforces one editable review per account and event. Public review lists contain no email or password fields. Deletion always scopes to the authenticated account.
+
+Research-backed external series live in `backend/services/catalog-service/src/data/campusEvents.json`. They have stable IDs, source URLs, checked dates and nullable event dates; they have no fictional seat inventory or payment prices. Reviews can reference these IDs as well as native MongoDB event IDs.
 
 ## Example booking
 

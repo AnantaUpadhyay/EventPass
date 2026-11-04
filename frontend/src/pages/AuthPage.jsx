@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { api } from "../api";
 import { ErrorMessage } from "../components/UI";
 export default function AuthPage() {
   const { login, register } = useAuth();
+  const [universities, setUniversities] = useState([]);
+  const [universityId, setUniversityId] = useState("");
+  const [organizerRequested, setOrganizerRequested] = useState(false);
+  useEffect(() => {
+    api("/api/catalog/universities").then(data => setUniversities(data.universities)).catch(err => setError(err.message));
+  }, []);
   const [tab, setTab] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,8 +23,8 @@ export default function AuthPage() {
     setError("");
     setBusy(true);
     try {
-      if (tab === "login") await login(email, password);
-      else await register(name, email, password);
+      if (tab === "login") await login(email, password, universityId);
+      else await register(name, email, password, universityId, organizerRequested);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -57,6 +64,18 @@ export default function AuthPage() {
       </div>
       <ErrorMessage>{error}</ErrorMessage>
       <form onSubmit={submit}>
+        <label>
+          Your university
+          <select value={universityId} onChange={e => setUniversityId(e.target.value)} required>
+            <option value="">Select your university</option>
+            {universities.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+          </select>
+        </label>
+        <p className="campus-form-note">Campus selection is self-reported. It does not verify university affiliation.</p>
+        {tab === "register" && <label className="campus-checkbox">
+          <input type="checkbox" checked={organizerRequested} onChange={e => setOrganizerRequested(e.target.checked)} />
+          Request university organizer access (admin approval required)
+        </label>}
         {tab === "register" && (
           <label>
             Full name
@@ -121,6 +140,7 @@ export default function AuthPage() {
           <button
             disabled={busy}
             onClick={() => {
+              setUniversityId("bennett");
               setEmail("student@college.edu");
               setPassword("student123");
             }}
