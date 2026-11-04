@@ -15,7 +15,7 @@ app.get("/api/health/:name", async (req, res) => {
   if (!url) return res.status(404).json({ error: "Unknown service." });
   try {
     const response = await fetch(`${url}/health`, {
-      signal: AbortSignal.timeout(2000),
+      signal: AbortSignal.timeout(process.env.VERCEL ? 12000 : 2000),
     });
     res.status(response.status).json(await response.json());
   } catch {
@@ -31,7 +31,7 @@ app.get("/api/system", async (req, res) => {
     targets.map(async ([name, url]) => {
       try {
         const response = await fetch(`${url}/health`, {
-          signal: AbortSignal.timeout(2000),
+          signal: AbortSignal.timeout(process.env.VERCEL ? 12000 : 2000),
         });
         return { name, ...(await response.json()), reachable: true };
       } catch {
@@ -96,7 +96,7 @@ app.use((req, res, next) => {
       response.pipe(res);
     },
   );
-  upstream.setTimeout(15000, () =>
+  upstream.setTimeout(process.env.VERCEL ? 25000 : 15000, () =>
     upstream.destroy(new Error("Upstream timeout")),
   );
   upstream.on("error", () => {

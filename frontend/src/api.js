@@ -3,7 +3,7 @@ export async function api(path, { token, ...options } = {}) {
   try {
     response = await fetch(path, {
       ...options,
-      signal: options.signal || AbortSignal.timeout(15000),
+      signal: options.signal || AbortSignal.timeout(30000),
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),

@@ -55,15 +55,13 @@ function createApp(name, dependencies = () => ({})) {
   app.get("/health", (req, res) => {
     const deps = dependencies();
     const ready = Object.values(deps).every(Boolean);
-    res
-      .status(ready ? 200 : 503)
-      .json({
-        service: name,
-        instance: process.env.INSTANCE_ID || name,
-        status: ready ? "UP" : "DEGRADED",
-        dependencies: deps,
-        uptime: Math.floor(process.uptime()),
-      });
+    res.status(ready ? 200 : 503).json({
+      service: name,
+      instance: process.env.INSTANCE_ID || name,
+      status: ready ? "UP" : "DEGRADED",
+      dependencies: deps,
+      uptime: Math.floor(process.uptime()),
+    });
   });
   return app;
 }
@@ -80,17 +78,15 @@ function errors(app) {
           ? 400
           : 500);
     if (status >= 500) console.error(`[${req.requestId}]`, err.message);
-    res
-      .status(status)
-      .json({
-        error:
-          status === 500
-            ? "Service unavailable. Please try again."
-            : err.code === 11000
-              ? "This record already exists."
-              : err.message,
-        requestId: req.requestId,
-      });
+    res.status(status).json({
+      error:
+        status === 500
+          ? "Service unavailable. Please try again."
+          : err.code === 11000
+            ? "This record already exists."
+            : err.message,
+      requestId: req.requestId,
+    });
   });
   return app;
 }
@@ -114,7 +110,7 @@ function sign(user) {
 async function serviceFetch(url, options = {}) {
   const res = await fetch(url, {
     ...options,
-    signal: AbortSignal.timeout(5000),
+    signal: AbortSignal.timeout(process.env.VERCEL ? 15000 : 5000),
     headers: {
       "Content-Type": "application/json",
       "x-internal-key": process.env.INTERNAL_API_KEY,
