@@ -185,7 +185,6 @@ h3 {
   margin: 0 auto;
   flex: 1;
   padding: 40px 46px 30px;
-  animation: page-in 0.45s ease both;
 }
 .main-footer {
   border-top: 1px solid var(--line);

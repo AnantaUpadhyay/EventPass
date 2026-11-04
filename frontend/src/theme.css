@@ -134,7 +134,7 @@ label,
   display: none;
 }
 .main-content {
-  view-transition-name: page;
+  animation: none;
 }
 .order-cover,
 .booking-success .ticket-cover {
