@@ -39,12 +39,10 @@ app.get("/api/system", async (req, res) => {
       }
     }),
   );
-  res
-    .set("Cache-Control", "no-store")
-    .json({
-      gateway: process.env.VERCEL ? "vercel-services" : "local-round-robin",
-      services: statuses,
-    });
+  res.set("Cache-Control", "no-store").json({
+    gateway: process.env.VERCEL ? "vercel-services" : "local-round-robin",
+    services: statuses,
+  });
 });
 app.use((req, res, next) => {
   res.set({
@@ -58,6 +56,27 @@ app.use((req, res, next) => {
     /^\/api\/(auth|catalog|booking|notifications)(\/|$)/,
   );
   if (!match) return next();
+  if (
+    process.env.VERCEL &&
+    req.method === "POST" &&
+    req.path === "/api/booking/confirm"
+  ) {
+    const { waitUntil } = require("@vercel/functions");
+    const { serviceFetch } = require("../../shared/http");
+    waitUntil(
+      new Promise((resolve) => res.once("finish", resolve))
+        .then(async () => {
+          if (res.statusCode < 300) {
+            await serviceFetch(`${services.notifications}/internal/process`, {
+              method: "POST",
+            });
+          }
+        })
+        .catch((error) =>
+          console.error("Mail dispatch deferred:", error.message),
+        ),
+    );
+  }
   const target = new URL(services[match[1]]);
   const transport = target.protocol === "https:" ? https : http;
   const upstream = transport.request(

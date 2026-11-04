@@ -13,6 +13,8 @@ Set these Vercel environment variables before deploying:
 
 The Vercel entrypoints initialize database connections and indexes once per function instance. MongoDB databases remain separated by service. The ordinary `server.js` entrypoints still run the local/Docker services.
 
-After a confirmed booking, Vercel `waitUntil` invokes the authenticated notification processor. The durable outbox is retained if dispatch fails. A daily authenticated cron retries outstanding messages; the Vercel deployment does not run the local three-second worker loop. Email retries can therefore be delayed during provider outages. For frequent automatic retries, use a dedicated worker or a more frequent scheduler supported by your hosting plan.
+A private read-only catalog replica reuses the catalog implementation for booking lookups. This avoids a cycle between catalog availability counts and booking event lookups; Vercel rejects cyclic service bindings.
+
+After a confirmed booking, the gateway uses Vercel `waitUntil` invokes the authenticated notification processor. The durable outbox is retained if dispatch fails. A daily authenticated cron retries outstanding messages; the Vercel deployment does not run the local three-second worker loop. Email retries can therefore be delayed during provider outages. For frequent automatic retries, use a dedicated worker or a more frequent scheduler supported by your hosting plan.
 
 Verify the public deployment before relying on it: catalog search, signup/login, two-account seat exclusion, confirmation, ticket retrieval and real email delivery. Local integration checks use isolated test accounts and remove their test data.

@@ -42,15 +42,9 @@
       "bindings": [
         {
           "type": "service",
-          "service": "catalog",
+          "service": "catalog-reader",
           "format": "url",
           "env": "CATALOG_URL"
-        },
-        {
-          "type": "service",
-          "service": "notifications",
-          "format": "url",
-          "env": "NOTIFICATION_URL"
         }
       ]
     },
@@ -99,6 +93,12 @@
           "env": "NOTIFICATION_URL"
         }
       ]
+    },
+    "catalog-reader": {
+      "root": "backend/services/catalog-reader",
+      "framework": "express",
+      "entrypoint": "vercel.js",
+      "installCommand": "cd ../../.. && npm ci"
     }
   },
   "rewrites": [
