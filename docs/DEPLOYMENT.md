@@ -15,13 +15,13 @@ The Vercel entrypoints initialize database connections and indexes once per func
 
 A private read-only catalog replica reuses the catalog implementation for booking lookups. This avoids a cycle between catalog availability counts and booking event lookups; Vercel rejects cyclic service bindings.
 
-After a confirmed booking, the gateway uses Vercel `waitUntil` invokes the authenticated notification processor. The durable outbox is retained if dispatch fails. A daily authenticated cron retries outstanding messages; the Vercel deployment does not run the local three-second worker loop. Email retries can therefore be delayed during provider outages. For frequent automatic retries, use a dedicated worker or a more frequent scheduler supported by your hosting plan.
+After a confirmed booking, the gateway uses Vercel `waitUntil` to invoke the authenticated notification processor. The durable outbox is retained if dispatch fails. A daily authenticated cron retries outstanding messages; the Vercel deployment does not run the local three-second worker loop. Email retries can therefore be delayed during provider outages. For frequent automatic retries, use a dedicated worker or a more frequent scheduler supported by your hosting plan.
 
 Verify the public deployment before relying on it: catalog search, signup/login, two-account seat exclusion, confirmation, ticket retrieval and real email delivery. Local integration checks use isolated test accounts and remove their test data.
 
 ## Third-party discovery
 
-Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `GEMINI_MODEL` defaults to `gemini-3.5-flash`; choose another currently supported Search-grounding model only after checking Google's documentation. The catalog service calls Google's Interactions API with Google Search and structured output. A live provider call must be checked after key setup; unit fixtures do not establish live search availability.
+Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `GEMINI_MODEL` defaults to `gemini-3.5-flash`, as configured for this project. Google has deprecated this ID and routes it to `gemini-3.6-flash`; see the [model documentation](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash). Changing the model does not remove provider billing or quota requirements. The catalog service calls Google's Interactions API with Google Search and structured output. A live provider call must be checked after key setup; unit fixtures do not establish live search availability.
 
 `GET /api/catalog/discovery/options` lists supported cities and categories. Authenticated `GET /api/catalog/discovery?city=Noida&q=music&category=All` returns externally hosted event listings. Choosing a city starts the search automatically; name searches submit explicitly.
 

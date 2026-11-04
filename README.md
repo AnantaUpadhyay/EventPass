@@ -1,6 +1,6 @@
 # EventPass
 
-A campus event booking app built with React, Express, MongoDB and Redis. Students can browse events, reserve up to ten seats, and receive a QR ticket. Organizers can create events.
+An event discovery and booking app built with React, Express, MongoDB and Redis. Users can browse events, reserve up to ten seats, and receive a QR ticket. Organizers can create events. City-based discovery finds third-party listings and links to their booking providers.
 
 The backend has four services: authentication, catalog, booking and notifications. Redis coordinates seat holds; MongoDB stores confirmed bookings. Checkout is a demo and does not collect payments.
 
@@ -41,7 +41,8 @@ frontend/
 backend/
   services/
     auth-service/        Registration, login and profiles
-    catalog-service/     Event data and cache
+    catalog-service/     Event data, cache and third-party discovery
+    catalog-reader/      Private read-only catalog entrypoint for Vercel
     booking-service/     Holds, checkout and saved tickets
     notification-service/ SMTP delivery and retries
     gateway/             Local reverse proxy
@@ -52,7 +53,7 @@ scripts/                 Setup, process runner and integration tests
 docs/                    Schema, architecture and API examples
 ```
 
-Each service has its own `server.js` and package manifest. Auth, catalog and booking use routes, controllers, models and config folders. The smaller notification service keeps its worker and delivery model in `src/app.js`.
+Each local service has its own `server.js` and package manifest. The Vercel-only catalog reader reuses the catalog service implementation. Auth, catalog and booking use routes, controllers, models and config folders. The smaller notification service keeps its worker and delivery model in `src/app.js`.
 
 Use `npm run dev:frontend` and `npm run dev:backend` in separate terminals if preferred. Install dependencies once from the repository root.
 
@@ -90,6 +91,7 @@ If the local gateway already occupies port 8080, use `GATEWAY_PORT=9080 docker c
 ## Documentation
 
 - [Architecture and trade-offs](docs/ARCHITECTURE.md)
+- [Deployment and environment variables](docs/DEPLOYMENT.md)
 - [Database schema](docs/DATABASE_SCHEMA.md)
 - [Schema diagram](docs/EventPass_Database_Schema.png)
 - [Postman collection](docs/EventPass.postman_collection.json)
@@ -100,4 +102,4 @@ The mail service follows the Express/Nodemailer pattern from the [lecture exampl
 
 ## Current limits
 
-Payment is mocked. Cancellation, refunds and admission scanning are not implemented. Local email is captured by Mailpit; external delivery needs an SMTP provider. Sessions are held in memory and reset on refresh. Production TLS, multi-node infrastructure and large-scale load testing remain deployment work.
+Payment is mocked. Cancellation, refunds and admission scanning are not implemented. Local email is captured by Mailpit; external delivery needs an SMTP provider. Sessions are held in memory and reset on refresh. Vercel provides HTTPS and service hosting; large-scale load testing has not been completed. Third-party discovery requires a server-side Gemini key and sufficient Google Search quota. Provider checkout happens outside EventPass.
