@@ -171,7 +171,7 @@ export default function BookingPage({ event, onBack, onBooked }) {
         <h1>
           See you <span className="serif-word">there.</span>
         </h1>
-        <p>Your ticket is saved. A copy will arrive by email.</p>
+        <p>Your ticket is saved. Check My tickets for email delivery status.</p>
         <TicketCard booking={booking} />
         <button className="button primary" onClick={onBooked}>
           See all my tickets <ArrowUpRight size={18} />

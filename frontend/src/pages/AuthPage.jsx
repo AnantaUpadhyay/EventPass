@@ -115,18 +115,20 @@ export default function AuthPage() {
           <ArrowUpRight size={18} />
         </button>
       </form>
-      <div className="demo-access">
-        <span>HERE FOR THE LAB DEMO?</span>
-        <button
-          disabled={busy}
-          onClick={() => {
-            setEmail("student@college.edu");
-            setPassword("student123");
-          }}
-        >
-          Use student credentials <ArrowUpRight size={13} />
-        </button>
-      </div>
+      {import.meta.env.DEV && (
+        <div className="demo-access">
+          <span>HERE FOR THE LAB DEMO?</span>
+          <button
+            disabled={busy}
+            onClick={() => {
+              setEmail("student@college.edu");
+              setPassword("student123");
+            }}
+          >
+            Use student credentials <ArrowUpRight size={13} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
