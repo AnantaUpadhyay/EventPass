@@ -119,7 +119,7 @@ function AppContent() {
               ))}
             </nav>
             <span className="breadcrumb">
-              Campus journal <span>/</span>{" "}
+              EventPass <span>/</span>{" "}
               <b>
                 {page === "booking"
                   ? "Your next experience"
@@ -139,7 +139,6 @@ function AppContent() {
             >
               {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-            <span className="edition">NOVEMBER ‘26</span>
             {loading ? (
               <span className="spinner" />
             ) : user ? (
@@ -173,7 +172,12 @@ function AppContent() {
               {deepLinkError}
             </div>
           )}
-          {page === "discover" && <CatalogPage onSelectEvent={select} />}
+          {page === "discover" && (
+            <CatalogPage
+              onSelectEvent={select}
+              onSignIn={() => setAuthOpen(true)}
+            />
+          )}
           {page === "booking" && event && (
             <BookingPage
               event={event}
@@ -197,8 +201,8 @@ function AppContent() {
         </main>
         <footer className="main-footer">
           <Brand />
-          <span>Campus events, thoughtfully gathered.</span>
-          <span>Built for the campus community.</span>
+          <span>Great events. Good company.</span>
+          <span>Discover. Book. Be there.</span>
         </footer>
       </div>
       <nav className="mobile-bottom-nav" aria-label="Mobile navigation">

@@ -1315,3 +1315,217 @@ label,
     min-width: 600px;
   }
 }
+
+.city-discovery {
+  margin: 38px 0 48px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+}
+.city-discovery-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.city-discovery h2 {
+  margin: 10px 0;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+.city-discovery-heading p {
+  max-width: 650px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.city-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.city-discovery select {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  min-height: 46px;
+  max-width: 100%;
+}
+.city-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px auto;
+  gap: 12px;
+  margin-top: 24px;
+}
+.city-search .search-box {
+  min-width: 0;
+}
+.city-search .search-box input {
+  min-width: 0;
+}
+.city-search .button {
+  white-space: nowrap;
+}
+.city-message,
+.city-sign-in p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 24px 0 0;
+}
+.city-sign-in {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-top: 20px;
+}
+.city-sign-in p {
+  margin: 0;
+}
+.city-results-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  margin: 28px 0 16px;
+}
+.city-events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.city-event {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.city-category {
+  align-self: start;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--ink);
+  border-bottom: 2px solid var(--violet);
+  padding-bottom: 7px;
+}
+.city-event h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 18px 0;
+  overflow-wrap: anywhere;
+}
+.city-event p {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 5px 0;
+  color: var(--muted);
+}
+.city-event p svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.city-event a {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.city-event a:hover {
+  text-decoration: underline;
+}
+.city-event a svg {
+  flex-shrink: 0;
+}
+.city-provider-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 20px 0 0;
+}
+.city-search-suggestions {
+  width: 100%;
+  height: 180px;
+  border: 0;
+  margin-top: 20px;
+  background: var(--white);
+  border-radius: 8px;
+}
+[data-theme="light"] .city-discovery :is(p, .city-results-meta) {
+  color: #62665c;
+}
+@media (max-width: 1000px) {
+  .city-events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .city-discovery-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .city-discovery {
+    margin: 24px 0 32px;
+    padding: 20px 16px;
+  }
+  .city-search {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+  }
+  .city-search .search-box {
+    grid-column: 1 / -1;
+  }
+  .city-discovery select,
+  .city-search .search-box input {
+    font-size: 16px;
+  }
+  .city-events-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .city-sign-in {
+    flex-direction: column;
+    align-items: start;
+  }
+  .city-event {
+    padding: 20px;
+  }
+  .city-search .button {
+    font-size: 12px;
+    padding-inline: 10px;
+    gap: 6px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

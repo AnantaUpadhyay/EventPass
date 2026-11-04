@@ -103,3 +103,10 @@ Idempotency-Key: group-checkout-unique-0001
 Content-Type: application/json
 
 {"eventId":"{{eventId}}","seatIds":["A2","A3"]}
+
+### Supported discovery locations
+GET {{base}}/api/catalog/discovery/options
+
+### Real third-party events (requires Gemini server configuration)
+GET {{base}}/api/catalog/discovery?city=Noida&category=All&q=music
+Authorization: Bearer {{token}}

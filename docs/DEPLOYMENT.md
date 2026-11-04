@@ -18,3 +18,13 @@ A private read-only catalog replica reuses the catalog implementation for bookin
 After a confirmed booking, the gateway uses Vercel `waitUntil` invokes the authenticated notification processor. The durable outbox is retained if dispatch fails. A daily authenticated cron retries outstanding messages; the Vercel deployment does not run the local three-second worker loop. Email retries can therefore be delayed during provider outages. For frequent automatic retries, use a dedicated worker or a more frequent scheduler supported by your hosting plan.
 
 Verify the public deployment before relying on it: catalog search, signup/login, two-account seat exclusion, confirmation, ticket retrieval and real email delivery. Local integration checks use isolated test accounts and remove their test data.
+
+## Third-party discovery
+
+Configure `GEMINI_API_KEY` as a server-only secret for Production and Preview. `GEMINI_MODEL` defaults to `gemini-3.8-flash`; choose another currently supported Search-grounding model only after checking Google's documentation. The catalog service calls Google's Interactions API with Google Search and structured output. A live provider call must be checked after key setup; unit fixtures do not establish live search availability.
+
+`GET /api/catalog/discovery/options` lists supported cities and categories. Authenticated `GET /api/catalog/discovery?city=Noida&q=music&category=All` returns externally hosted event listings. Choosing a city starts the search automatically; name searches submit explicitly.
+
+Only public HTTPS URLs present in Google's citation annotations are returned. Entries without a real calendar date in the next 60 days or a venue are dropped, and duplicate URLs are removed. This does not independently verify availability or establish a partnership with the source. Booking and payment occur on the provider's website. Google search suggestions are shown in a sandboxed frame without script access.
+
+Redis caches each city/query/category for 15 minutes and coordinates searches across instances. Fresh searches are limited to five per user per minute and 30 globally per UTC day by default. `DISCOVERY_DAILY_LIMIT` can change the daily limit (maximum 1000). A request consumes budget before calling Google; failed requests also count. Configure Google-side billing quotas separately. No API key is exposed to the browser.

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { api, money } from "../api";
 import { ErrorMessage, Empty } from "../components/UI";
+import CityDiscovery from "../components/CityDiscovery";
 const categories = [
   ["All", "All experiences"],
   ["Concert", "Music & nightlife"],
@@ -17,7 +18,7 @@ const categories = [
   ["Sports & Gaming", "Sports & gaming"],
   ["Conference", "Conferences"],
 ];
-export default function CatalogPage({ onSelectEvent }) {
+export default function CatalogPage({ onSelectEvent, onSignIn }) {
   const [events, setEvents] = useState([]);
   const [spotlight, setSpotlight] = useState(null);
   useEffect(() => {
@@ -66,21 +67,21 @@ export default function CatalogPage({ onSelectEvent }) {
     <div className="catalog-page">
       <div className="intro-line">
         <span className="eyebrow">
-          <span className="journal-line" /> THE NOVEMBER JOURNAL
+          <span className="journal-line" /> EVENTS & EXPERIENCES
         </span>
         <span className="campus-label">
-          <span className="status-dot" /> Campus edition · November 2026
+          <span className="status-dot" /> Music · Culture · Live events
         </span>
       </div>
       <div className="editorial-heading">
         <h1>
-          Around campus. <br />
+          Discover what’s next. <br />
           Worth <span className="serif-word">being there.</span>
         </h1>
         <p>
-          Music, ideas, and people. <br />A few things worth making time for.{" "}
-          <br />
-          <span>Browse what’s on this month.</span>
+          Live music, films, and good company. <br />A few things worth making
+          time for. <br />
+          <span>Find a plan worth showing up for.</span>
         </p>
       </div>
       <section className="hero">
@@ -167,10 +168,11 @@ export default function CatalogPage({ onSelectEvent }) {
           Browse the calendar <ArrowRight size={16} />
         </button>
       </div>
+      <CityDiscovery onSignIn={onSignIn} />
       <section ref={section} className="events-section">
         <div className="section-top">
           <div>
-            <span className="eyebrow">THE CALENDAR</span>
+            <span className="eyebrow">BOOK ON EVENTPASS</span>
             <h2>
               What’s <span className="serif-word">on.</span>
             </h2>

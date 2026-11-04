@@ -96,8 +96,13 @@ app.use((req, res, next) => {
       response.pipe(res);
     },
   );
-  upstream.setTimeout(process.env.VERCEL ? 25000 : 15000, () =>
-    upstream.destroy(new Error("Upstream timeout")),
+  upstream.setTimeout(
+    req.path === "/api/catalog/discovery"
+      ? 65000
+      : process.env.VERCEL
+        ? 25000
+        : 15000,
+    () => upstream.destroy(new Error("Upstream timeout")),
   );
   upstream.on("error", () => {
     if (!res.headersSent)
