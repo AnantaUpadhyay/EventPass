@@ -5,4 +5,5 @@ module.exports = require("../../shared/vercel")(app, async () => {
     redis.ready() || redis.connect(),
   ]);
   await require("./src/models/user.model").init();
+  await require("./src/models/session.model").init();
 });

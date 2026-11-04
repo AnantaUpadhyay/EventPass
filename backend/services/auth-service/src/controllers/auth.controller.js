@@ -1,3 +1,37 @@
+const { randomBytes, createHash } = require("node:crypto");
+const Session = require("../models/session.model");
+const SESSION_AGE = 400 * 24 * 60 * 60 * 1000;
+const cookieOptions = { httpOnly: true, secure: Boolean(process.env.VERCEL) || process.env.NODE_ENV === "production", sameSite: "strict", path: "/api/auth" };
+function sessionHash(req) {
+  const value = (req.headers.cookie || "").split(";").map(part => part.trim()).find(part => part.startsWith("ep_session="))?.slice(11);
+  return value && /^[a-f0-9]{64}$/.test(value) ? createHash("sha256").update(value).digest("hex") : null;
+}
+async function startSession(req, res, user) {
+  const oldHash = sessionHash(req);
+  if (oldHash) await Session.deleteOne({ tokenHash: oldHash });
+  const token = randomBytes(32).toString("hex");
+  await Session.create({ tokenHash: createHash("sha256").update(token).digest("hex"), userId: user._id, expiresAt: new Date(Date.now() + SESSION_AGE) });
+  res.cookie("ep_session", token, { ...cookieOptions, maxAge: SESSION_AGE });
+  res.set("Cache-Control", "no-store");
+}
+exports.session = async (req, res) => {
+  res.set("Cache-Control", "no-store");
+  const tokenHash = sessionHash(req);
+  const session = tokenHash && await Session.findOne({ tokenHash, expiresAt: { $gt: new Date() } });
+  const user = session && await User.findById(session.userId);
+  if (!user) throw fail(401, "Please sign in to continue.");
+  session.expiresAt = new Date(Date.now() + SESSION_AGE);
+  await session.save();
+  const token = req.headers.cookie.split(";").map(part => part.trim()).find(part => part.startsWith("ep_session=")).slice(11);
+  res.cookie("ep_session", token, { ...cookieOptions, maxAge: SESSION_AGE });
+  res.json({ user: view(user), token: sign(user) });
+};
+exports.logout = async (req, res) => {
+  const tokenHash = sessionHash(req);
+  if (tokenHash) await Session.deleteOne({ tokenHash });
+  res.clearCookie("ep_session", cookieOptions);
+  res.set("Cache-Control", "no-store").status(204).end();
+};
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 const { fail, sign } = require("../../../../shared/http");
@@ -43,6 +77,7 @@ exports.register = async (req, res) => {
     universityId: req.body.universityId,
     organizerRequested: req.body.organizerRequested === true,
   });
+  await startSession(req, res, user);
   res.status(201).json({ user: view(user), token: sign(user) });
 };
 exports.login = async (req, res) => {
@@ -57,6 +92,7 @@ exports.login = async (req, res) => {
       throw fail(403, "This account belongs to a different university.");
     if (!user.universityId) { user.universityId = selected; await user.save(); }
   }
+  await startSession(req, res, user);
   res.json({ user: view(user), token: sign(user) });
 };
 exports.me = async (req, res) => {

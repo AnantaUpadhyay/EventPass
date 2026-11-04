@@ -19,6 +19,8 @@ router.use(
     next();
   }),
 );
+router.post("/session", asyncRoute(controller.session));
+router.post("/logout", asyncRoute(controller.logout));
 router.post("/register", asyncRoute(controller.register));
 router.post("/login", asyncRoute(controller.login));
 router.get("/me", auth, asyncRoute(controller.me));

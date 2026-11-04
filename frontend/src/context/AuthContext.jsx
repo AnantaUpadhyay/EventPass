@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { api } from "../api";
 const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
+  const sessionVersion = useRef(0);
   const [guestTheme, setGuestTheme] = useState(() => {
     try { return localStorage.getItem("ep_guest_theme") === "light" ? "light" : "dark"; }
     catch { return "dark"; }
@@ -10,7 +11,7 @@ export function AuthProvider({ children }) {
   const [themeError, setThemeError] = useState("");
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(Boolean(token));
+  const [loading, setLoading] = useState(true);
   const theme = user ? (user.theme === "light" ? "light" : "dark") : guestTheme;
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -35,28 +36,25 @@ export function AuthProvider({ children }) {
     } finally { setThemeSaving(false); }
   }
   useEffect(() => {
-    if (!token) {
-      setLoading(false);
-      return;
-    }
     let current = true;
-    api("/api/auth/me", { token })
-      .then((data) => {
-        if (current) setUser(data.user);
-      })
-      .catch((err) => {
-        if (current && err.status === 401) logout();
-      })
-      .finally(() => {
-        if (current) setLoading(false);
-      });
-    return () => {
-      current = false;
-    };
-  }, [token]);
+    async function restore() {
+      const version = sessionVersion.current;
+      try {
+        const data = await api("/api/auth/session", { method: "POST" });
+        if (current && version === sessionVersion.current) { setUser(data.user); setToken(data.token); }
+      } catch (err) {
+        if (current && version === sessionVersion.current && err.status === 401) { setUser(null); setToken(null); }
+      } finally { if (current) setLoading(false); }
+    }
+    restore();
+    const timer = setInterval(restore, 12 * 60 * 60 * 1000);
+    window.addEventListener("focus", restore);
+    return () => { current = false; clearInterval(timer); window.removeEventListener("focus", restore); };
+  }, []);
   function save(data) {
+    sessionVersion.current += 1;
     setThemeError("");
-    setLoading(true);
+    setLoading(false);
     setUser(data.user);
     setToken(data.token);
   }
@@ -78,12 +76,14 @@ export function AuthProvider({ children }) {
     const data = await api("/api/auth/organizer-requests", { token, method: "POST" });
     setUser(current => current?.id === data.user.id ? data.user : current);
   }
-  function logout() {
+  async function logout() {
+    sessionVersion.current += 1;
+    try { await api("/api/auth/logout", { method: "POST" }); }
+    catch { setThemeError("Could not sign out. Check your connection and try again."); return; }
     setThemeError("");
     setUser(null);
     setToken(null);
-    localStorage.removeItem("ep_token");
-    localStorage.removeItem("ep_user");
+    try { localStorage.removeItem("ep_token"); localStorage.removeItem("ep_user"); } catch {}
   }
   return (
     <AuthContext.Provider

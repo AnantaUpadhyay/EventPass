@@ -3,6 +3,7 @@ const User = require("./src/models/user.model");
 async function start() {
   await Promise.all([db.connect(), redis.connect()]);
   await User.init();
+  await require("./src/models/session.model").init();
   if (process.env.SEED_DEMO === "true") {
     const bcrypt = require("bcryptjs");
     for (const [email, name, role] of [
